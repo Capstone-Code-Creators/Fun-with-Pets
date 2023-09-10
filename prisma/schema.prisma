@@ -9,3 +9,51 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id Int @id @default(autoincrement())
+
+  firstName String @db.VarChar(50)
+  lastName String @db.VarChar(50)
+  username String @db.VarChar(50) @unique // no repeating usernames
+  location String? @db.VarChar(255) // longer string for URLs
+  email String @db.VarChar(50)
+  profilePic String? @db.VarChar(255)
+  password String @db.VarChar(50)
+
+  pets Pet[] //please double check all relations
+  posts Post[]
+  replies Reply[]
+}
+
+model Pet {
+  id Int @id @default(autoincrement())
+  type String @db.VarChar(50)
+  breed String? @db.VarChar(50)
+  name String @db.VarChar(50)
+  image String @db.VarChar(255)
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(50)
+  content String @db.Text
+  likes Boolean? // would prefer to combine like/dislike into one boolean
+  dislikes Boolean? // used boolean instead of BigInt as boolean is better fit
+  postImg String? @db.VarChar(255)
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  replies Reply[] 
+
+}
+
+model Reply {
+  id Int @id @default(autoincrement())
+  content String @db.Text
+  postId Int
+  post Post @relation(fields: [postId], references: [id]) // double check these references, please
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+}
