@@ -9,6 +9,9 @@
     "client:build": "cd client && npm run build ",
     "seed": "npx prisma migrate reset"
   },
+  "prisma": {
+    "seed": "node ./prisma/seed.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
