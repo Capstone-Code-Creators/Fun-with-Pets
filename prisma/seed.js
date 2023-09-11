@@ -122,9 +122,30 @@ const main = async() => {
     });
 
     // CREATE DUMMY POSTS
-    
-    // CREATE DUMMY REPLIES
+    await prisma.post.create({
+        data: {
+            title: "First Post Ever",
+            content: "This is the first post on the site, I'd better say something meaningful... Bird cloacaes are disgusting.",
+            postId: 1,
+            userId: 5,
+        },
+    });
 
+    // CREATE DUMMY REPLIES
+    await prisma.reply.create({
+        data: {
+            content: "I disagree, you are a fool",
+            postId: 1,
+            userId: 1,
+        },
+    });
+    await prisma.reply.create({
+        data: {
+            content: "I agree, but you are still a fool",
+            postId: 1,
+            userId: 2,
+        },
+    });
 };
 
 main();
