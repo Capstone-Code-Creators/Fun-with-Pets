@@ -1,15 +1,20 @@
-import { useState } from 'react'
-
-import './App.css'
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Landing from './pages/Landing';
+import Login from './Login';
+import Register from './RegisterPage';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <h1>hello</h1>
-    </>
-  )
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Landing} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+      </Switch>
+    </Router>
+  );
 }
 
-export default App
+export default App;
