@@ -122,9 +122,30 @@ const main = async() => {
     });
 
     // CREATE DUMMY POSTS
-    
-    // CREATE DUMMY REPLIES
+    await prisma.post.create({
+        data: {
+            title: "First Post Ever",
+            content: "This is the first post on the site, I'd better say something meaningful... Birds are tiny dinosaurs.",
+            postImg: "https://www.rd.com/wp-content/uploads/2018/06/BNB16_1471813357616_648_preview_maxWidth_1600_maxHeight_1600.jpg",
+            userId: 5,
+        },
+    });
 
+    // CREATE DUMMY REPLIES
+    await prisma.reply.create({
+        data: {
+            content: "I disagree, you are a fool",
+            postId: 1,
+            userId: 1,
+        },
+    });
+    await prisma.reply.create({
+        data: {
+            content: "I agree, but you are still a fool",
+            postId: 1,
+            userId: 2,
+        },
+    });
 };
 
 main();
