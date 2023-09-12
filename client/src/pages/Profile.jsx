@@ -1,10 +1,36 @@
-import Login from './Login'; 
+import { useState, useEffect } from 'react';
 
-const Profile = () => {
+const Profile = ({ userId }) => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('../../../server/api/user/${userId}');
+                if(!response.ok) {
+                    throw new Error('Failed to fetch user data');
+                }
+                const userData = await response.json();
+                setUser(userData);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        }
+
+        fetchData();
+    }, [userId]);
+
   return (
     <div>
         {/* Need User to be pulled from logged in user from backend */}
-        <h1>Welcome, User!</h1>
+        {user ? (
+            <div>
+                <h1>Welcome, {user.firstName}!</h1>
+                <p>Email: {user.email}</p>
+            </div>    
+        ) : (
+            <p>Loading user data...</p>
+        )}
         {/* Create Route for Post page off of button  */}
         <button>Create a Post!</button>
         {/* Create map function to pull dummy post data */}

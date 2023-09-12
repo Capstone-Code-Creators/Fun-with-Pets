@@ -8,7 +8,7 @@ const Login = () => {
     <div>
       <h2>Login</h2>
       <LoginForm />
-      <Link to="./Profile">Profile</Link>
+      <Link to="/Profile">Profile</Link>
     </div>
   );
 }
