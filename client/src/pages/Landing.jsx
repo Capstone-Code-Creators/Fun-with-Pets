@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Landing() {
+const Landing = () => {
   return (
     <div className="landing-page">
       <h1>Welcome to Our Website</h1>
