@@ -6,7 +6,7 @@ const POSTS = () => {
           <section>
             <p>Tell us about your pet.</p>
             <form>
-              <label>Post: <input /></label>
+              <label>Post... <input /></label>
               <textarea></textarea>
               <button>Submit</button>
             </form>
