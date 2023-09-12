@@ -1,9 +1,9 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
-
+const bcrypt = require('bcryptjs');
 const main = async() => {
     // CREATE USERS
-    await prisma.user.create({
+    const user1 = await prisma.user.create({
         data: {
             firstName: "Shaggy",
             lastName: "Rogers",
@@ -11,10 +11,11 @@ const main = async() => {
             location: "Crystal Cove, California",
             email: "makingSandwichesShaggy@mysteryinc.com",
             profilePic: "https://static.wikia.nocookie.net/oneyplays/images/8/82/Shaggy_Rogers.png/revision/latest/scale-to-width-down/1000?cb=20180907203725",
-            password: 'ripCaseyKasem2014'
+            // password: await bcrypt.hash("ripCaseyKasem2014", 10)
+            password: "ripCaseyKasem2014",
         },
     });
-    await prisma.user.create({
+    const user2 = await prisma.user.create({
         data: {
             firstName: "Jon",
             lastName: "Arbuckle",
@@ -22,37 +23,41 @@ const main = async() => {
             location: "Muncie, Indiana",
             email: "poorCartoonist@pawsinc.com",
             profilePic: "https://i.kym-cdn.com/entries/icons/original/000/039/527/jon-arbuckle-dancing.jpg",
-            password: 'dontHitOdie1976'
+            // password: await bcrypt.hash("dontHitOdie1976", 5),
+            password: "dontHitOdie1976" 
         },
     });
-    await prisma.user.create({
+    const user3 = await prisma.user.create({
         data: {
             firstName: "Tommy",
             lastName: "Baumeister",
             username: "TommyB",
             location: "Mineapolis, Minnesota",
             email: "TommyB@petbook.com",
-            password: 'TOMMYB123'
+            // password: await bcrypt.hash("TOMMYB123", 5),
+            password: "TOMMYB123",
         },
     });
-    await prisma.user.create({
+    const user4 = await prisma.user.create({
         data: {
             firstName: "Boone",
             lastName: "Waldvogel",
             username: "BooneW",
             location: "Toledo, Ohio",
             email: "BooneW@petbook.com",
-            password: 'BOONEW123'
+            // password: await bcrypt.hash("BOONEW123", 5),
+            password: "BOONEW123",
         },
     });
-    await prisma.user.create({
+    const user5 = await prisma.user.create({
         data: {
             firstName: "Nathan",
             lastName: "Kim",
             username: "NathanK",
             location: "Queens, New York",
             email: "NateK@petbook.com",
-            password: 'NathanK123'
+            // password: await bcrypt.hash("NathanK123", 5),
+            password: "NATHANK123",
         },
     });
 
