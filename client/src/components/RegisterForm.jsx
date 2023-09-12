@@ -22,7 +22,7 @@ const RegisterForm = () => {
 
   return (
     <div className="register-form">
-      <h2>Register</h2>
+      {/* <h2>Register</h2> */}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username:</label>
