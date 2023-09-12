@@ -19,7 +19,7 @@ model User {
   location String? @db.VarChar(255) // change location to address for more specificity 
   email String @db.VarChar(50)
   profilePic String? @db.VarChar(255) // longer string for URLs
-  password String @db.VarChar(50)
+  password String @db.VarChar(255)
 
   pets Pet[] //please double check all relations
   posts Post[]
