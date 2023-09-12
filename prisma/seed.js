@@ -12,7 +12,7 @@ const main = async() => {
             email: "makingSandwichesShaggy@mysteryinc.com",
             profilePic: "https://static.wikia.nocookie.net/oneyplays/images/8/82/Shaggy_Rogers.png/revision/latest/scale-to-width-down/1000?cb=20180907203725",
             // password: await bcrypt.hash("ripCaseyKasem2014", 10)
-            password: "test"
+            password: "ripCaseyKasem2014",
         },
     });
     const user2 = await prisma.user.create({
@@ -23,7 +23,8 @@ const main = async() => {
             location: "Muncie, Indiana",
             email: "poorCartoonist@pawsinc.com",
             profilePic: "https://i.kym-cdn.com/entries/icons/original/000/039/527/jon-arbuckle-dancing.jpg",
-            password: await bcrypt.hash("dontHitOdie1976", 5),
+            // password: await bcrypt.hash("dontHitOdie1976", 5),
+            password: "dontHitOdie1976" 
         },
     });
     const user3 = await prisma.user.create({
@@ -33,7 +34,8 @@ const main = async() => {
             username: "TommyB",
             location: "Mineapolis, Minnesota",
             email: "TommyB@petbook.com",
-            password: await bcrypt.hash("TOMMYB123", 5),
+            // password: await bcrypt.hash("TOMMYB123", 5),
+            password: "TOMMYB123",
         },
     });
     const user4 = await prisma.user.create({
@@ -43,7 +45,8 @@ const main = async() => {
             username: "BooneW",
             location: "Toledo, Ohio",
             email: "BooneW@petbook.com",
-            password: await bcrypt.hash("BOONEW123", 5),
+            // password: await bcrypt.hash("BOONEW123", 5),
+            password: "BOONEW123",
         },
     });
     const user5 = await prisma.user.create({
@@ -53,7 +56,8 @@ const main = async() => {
             username: "NathanK",
             location: "Queens, New York",
             email: "NateK@petbook.com",
-            password: await bcrypt.hash("NathanK123", 5),
+            // password: await bcrypt.hash("NathanK123", 5),
+            password: "NATHANK123",
         },
     });
 
