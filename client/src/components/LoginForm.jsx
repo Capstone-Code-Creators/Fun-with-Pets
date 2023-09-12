@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 
-function LoginForm() {
+function LogInForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,7 +14,7 @@ function LoginForm() {
 
   return (
     <div className="login-form">
-      <h2>Login</h2>
+      {/* <h2>Login</h2> */}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username:</label>
@@ -44,4 +44,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LogInForm;

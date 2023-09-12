@@ -7,6 +7,7 @@ import Register from './pages/Register';
 
 const App = () => {
   return (
+    
     <Router>
       <Routes>
         <Route path="/" exact element={<Landing />} />
