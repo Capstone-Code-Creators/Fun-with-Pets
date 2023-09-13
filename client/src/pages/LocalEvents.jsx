@@ -12,7 +12,11 @@ const LocalEvents = () => {
             </h1>
             <Events />
             <button>Enter</button>
+            <section id='map-container'>
+                <p>map</p>
+            </section>
         </section>
+       
     );
 };
 export default LocalEvents;

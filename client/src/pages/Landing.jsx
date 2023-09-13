@@ -11,9 +11,9 @@ const Landing = () => {
       <section>
         <img src="" alt="logo" />
       </section>
-      <section id='landing-links'>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+      <section className='landing-links'>
+        <Link id='login-link' to="/login">Login</Link>
+        <Link id='register-link' to="/register">Register</Link>
       </section>
     </section>
   );

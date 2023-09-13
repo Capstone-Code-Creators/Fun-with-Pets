@@ -6,21 +6,21 @@ import "../App.css";
 
 const Login = () => {
   return (
-    <>
-      <section className="login-page">
-        <section>
-          <h2>Login</h2>
-          <LoginForm />
+    <section>
+        <section className='login-page'>
+            <section>
+              <h2>Login</h2>
+              <LoginForm />
+            </section>
+            <section id='needRegister'>
+              <h3>Need to Register?</h3>
+              <section id='registerText'>
+                <Link to="/register">Register</Link>
+                <Link to="/Profile">Profile</Link>
+              </section>
+            </section>
         </section>
-        <section id="needRegister">
-          <h3>Need to Register?</h3>
-          <section id="registerText">
-            <Link to="/Register">Register</Link>
-            <Link to="/Profile">Profile</Link>
-          </section>
-        </section>
-      </section>
-    </>
+    </section>
   );
 };
 

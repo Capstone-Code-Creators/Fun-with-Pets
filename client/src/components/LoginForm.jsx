@@ -14,10 +14,10 @@ const LogInForm = () => {
   };
 
   return (
-    <div className="login-form">
+    <section className="login-form">
       {/* <h2>Login</h2> */}
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <section className="form-group">
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -26,8 +26,8 @@ const LogInForm = () => {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </div>
-        <div className="form-group">
+        </section>
+        <section className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -36,12 +36,12 @@ const LogInForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <div className="form-group">
+        </section>
+        <section className="form-group">
           <button type="submit">Login</button>
-        </div>
+        </section>
       </form>
-    </div>
+    </section>
   );
 }
 
