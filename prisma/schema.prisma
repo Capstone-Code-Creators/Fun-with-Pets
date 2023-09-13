@@ -40,8 +40,8 @@ model Post {
   id Int @id @default(autoincrement())
   title String @db.VarChar(50)
   content String @db.Text
-  likes Boolean? // would prefer to combine like/dislike into one boolean
-  dislikes Boolean? // used boolean instead of BigInt as boolean is better fit
+  // likes Int @default(0)// would prefer to combine like/dislike into one boolean
+  // dislikes Int @default(0)// used boolean instead of BigInt as boolean is better fit
   postImg String? @db.VarChar(255)
   userId Int
   user User @relation(fields: [userId], references: [id])

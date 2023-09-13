@@ -1,16 +1,21 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../App.css';
+
 
 const Landing = () => {
   return (
-    <div className="landing-page">
+    <section className="landing-page">
       <h1>Welcome to Our Website</h1>
-      <div className="button-group">
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-      </div>
-    </div>
+      <section>
+        <img src="" alt="logo" />
+      </section>
+      <section className='landing-links'>
+        <Link id='login-link' to="/login">Login</Link>
+        <Link id='register-link' to="/register">Register</Link>
+      </section>
+    </section>
   );
 }
 

@@ -1,7 +1,7 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 const bcrypt = require('bcryptjs');
-const main = async() => {
+const main = async () => {
     // CREATE USERS
     const user1 = await prisma.user.create({
         data: {
@@ -24,7 +24,7 @@ const main = async() => {
             email: "poorCartoonist@pawsinc.com",
             profilePic: "https://i.kym-cdn.com/entries/icons/original/000/039/527/jon-arbuckle-dancing.jpg",
             // password: await bcrypt.hash("dontHitOdie1976", 5),
-            password: "dontHitOdie1976" 
+            password: "dontHitOdie1976"
         },
     });
     const user3 = await prisma.user.create({
@@ -133,6 +133,8 @@ const main = async() => {
             content: "This is the first post on the site, I'd better say something meaningful... Birds are tiny dinosaurs.",
             postImg: "https://www.rd.com/wp-content/uploads/2018/06/BNB16_1471813357616_648_preview_maxWidth_1600_maxHeight_1600.jpg",
             userId: user3.id,
+            // likes: 2,
+            // dislikes: 7,
         },
     });
 
@@ -151,6 +153,7 @@ const main = async() => {
             userId: 2,
         },
     });
+
 };
 
 main();
