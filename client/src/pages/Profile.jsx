@@ -7,53 +7,42 @@ const Profile = ({ token }) => {
 
     useEffect(() => {
 
-        const fetchUser = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch('../../../server/api/user/', {
+                // Fetch user data
+                const userResponse = await fetch("/api/user", {
                     headers: {
                         "Authorization" : `Bearer ${token}`
                     }
                 });
-                const userData = await response.json();
+                const userData = await userResponse.json();
                 setUser(userData);
+
+                // Fetch posts
+                const postsResponse = await fetch("/api/posts", {
+                  headers: {
+                    "Authorization": `Bearer ${token}`
+                  }
+                });
+                const postsData = await postsResponse.json();
+                setPosts(postsData);
+
+                // Fetch replies
+                const repliesResponse = await fetch("/api/replies", {
+                  headers: {
+                    "Authorization": `Bearer ${token}`
+                  }
+                });
+                const repliesData = await repliesResponse.json();
+                setReplies(repliesData);
 
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
         }
 
-        fetchUser();
-    }, []);
-
-    useEffect(() => {
-    
-        const fetchPosts = async () => {
-          const result = await fetch("/api/posts", {
-            headers: {
-              "Authorization" : `Bearer ${token}`
-            }
-          });
-          const data = await result.json();
-          setPosts(data);
-        };
-    
-        fetchPosts();
-      }, []);
-
-    useEffect(() => {
-    
-        const fetchReplies = async () => {
-          const result = await fetch("/api/replies", {
-            headers: {
-              "Authorization" : `Bearer ${token}`
-            }
-          });
-          const data = await result.json();
-          setReplies(data);
-        };
-    
-        fetchReplies();
-      }, []);
+        fetchData();
+    }, [token]);
 
     const formatUser = (user) => {
         return (
@@ -93,15 +82,15 @@ const Profile = ({ token }) => {
 
   return (
     <div>
-        {/* Need User to be pulled from logged in user from backend */}
+        {/* User Data */}
         {user && formatUser(user)}
         {/* Create Route for Post page off of button  */}
         <button>Create a Post!</button>
-        {/* Create map function to pull dummy post data */}
+        {/* Render Posts */}
         {posts.map((post) => {
             return formatPosts(post);
         })}
-        {/* Create map function to associate replies with appropriate dummy post data */}
+        {/* Render Replies */}
         {replies.map((reply) => {
             return formatReplies(reply);
         })}
