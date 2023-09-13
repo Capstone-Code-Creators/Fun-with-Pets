@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../App.css';
+
 
 const Landing = () => {
   return (
@@ -9,11 +11,10 @@ const Landing = () => {
       <section>
         <img src="" alt="logo" />
       </section>
-      <section className="button-group">
+      <section id='landing-links'>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
       </section>
-      
     </section>
   );
 }

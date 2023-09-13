@@ -1,4 +1,4 @@
-const POSTS = () => {
+const Posts = () => {
     
     return (
         <section>
@@ -6,8 +6,8 @@ const POSTS = () => {
           <section>
             <p>Tell us about your pet.</p>
             <form>
-              <label>Post... <input /></label>
-              <textarea></textarea>
+              <label>Post... </label>
+              <textarea id="dynamicTextarea"></textarea>
               <button>Submit</button>
             </form>
           </section>
@@ -15,4 +15,4 @@ const POSTS = () => {
     )
   }
   
-  export default POSTS;
+  export default Posts;

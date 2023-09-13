@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 });
 
 
-router.post("/signIn", async (req, res) => {
+router.post("/Login", async (req, res) => {
     const { username, password } = req.body;
 
     const user = await prisma.user.findUnique({
