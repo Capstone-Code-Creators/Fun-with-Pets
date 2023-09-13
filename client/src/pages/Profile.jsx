@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import ProfileDataFetcher from '../components/ProfileDataFetcher';
 import ProfileDeleteHandler from '../components/ProfileDeleteHandler';
 
+// eslint-disable-next-line react/prop-types
 const Profile = ({ token }) => {
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
@@ -67,9 +68,6 @@ const handleDeletePost = (postId) => {
         <ProfileDeleteHandler token={token} posts={posts} setPosts={setPosts} onDeletePost={handleDeletePost} replies={replies} setReplies={setReplies} />
     </div>
   );
-}
-
+};
 
 export default Profile;
-
-

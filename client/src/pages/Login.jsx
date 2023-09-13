@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
-import LoginForm from '../components/LoginForm'; 
-import { Link } from 'react-router-dom';
-import '../App.css';
+import React from "react";
+import LoginForm from "../components/LoginForm";
+import { Link } from "react-router-dom";
+import "../App.css";
 
 const Login = () => {
   return (
-    <div>
+    <section>
         <section className='login-page'>
             <section>
               <h2>Login</h2>
@@ -20,8 +20,8 @@ const Login = () => {
               </section>
             </section>
         </section>
-    </div>
+    </section>
   );
-}
+};
 
 export default Login;
