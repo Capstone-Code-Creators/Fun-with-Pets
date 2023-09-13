@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 
-function LogInForm() {
+const LogInForm = () => {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

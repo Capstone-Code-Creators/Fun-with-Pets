@@ -9,17 +9,14 @@ import './App.css';
 
 const App = () => {
   return (
-    
-      
-      <Router>
-        <Routes>
-          <Route path="/" exact element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </Router>
-   
+    <Router>
+      <Routes>
+        <Route path="/" exact element={<Landing />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/Profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
 }
 
