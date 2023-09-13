@@ -8,6 +8,7 @@ import Profile from  './pages/Profile';
 
 const App = () => {
   return (
+    
     <Router>
       <Routes>
         <Route path="/" exact element={<Landing />} />

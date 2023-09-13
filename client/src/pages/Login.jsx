@@ -5,11 +5,17 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
-    <div>
-      <h2>Login</h2>
-      <LoginForm />
-      <Link to="/Profile">Profile</Link>
-    </div>
+    <>
+      <section>
+        <h2>Login</h2>
+        <LoginForm />
+      </section>
+      <section>
+        <h3>Need to Register?</h3>
+        <Link to="/register">Register</Link>
+        <Link to="/Profile">Profile</Link>
+      </section>
+    </>
   );
 }
 

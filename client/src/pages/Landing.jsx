@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
-    <div className="landing-page">
+    <section className="landing-page">
       <h1>Welcome to Our Website</h1>
-      <div className="button-group">
+      <section>
+        <img src="" alt="logo" />
+      </section>
+      <section className="button-group">
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
-      </div>
-    </div>
+      </section>
+      
+    </section>
   );
 }
 
