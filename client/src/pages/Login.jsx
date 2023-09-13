@@ -3,7 +3,7 @@ import React from 'react';
 import LoginForm from '../components/LoginForm'; 
 import { Link } from 'react-router-dom';
 
-function Login() {
+const Login = () => {
   return (
     <>
       <section>
@@ -13,6 +13,7 @@ function Login() {
       <section>
         <h3>Need to Register?</h3>
         <Link to="/register">Register</Link>
+        <Link to="/Profile">Profile</Link>
       </section>
     </>
   );

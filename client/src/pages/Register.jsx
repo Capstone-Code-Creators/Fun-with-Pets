@@ -3,7 +3,7 @@ import React from 'react';
 import RegisterForm from '../components/RegisterForm'; // assuming you have this component
 
 const Register = () => {
-  return (
+  return ( 
     <div>
       <h2>Register</h2>
       <RegisterForm />

@@ -133,6 +133,8 @@ const main = async() => {
             content: "This is the first post on the site, I'd better say something meaningful... Birds are tiny dinosaurs.",
             postImg: "https://www.rd.com/wp-content/uploads/2018/06/BNB16_1471813357616_648_preview_maxWidth_1600_maxHeight_1600.jpg",
             userId: 5,
+            likes: 2,
+            dislikes: 7,
         },
     });
 
@@ -151,6 +153,7 @@ const main = async() => {
             userId: 2,
         },
     });
+
 };
 
 main();
