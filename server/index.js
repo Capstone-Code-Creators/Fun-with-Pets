@@ -1,10 +1,11 @@
 require("dotenv").config();
 console.log('DATABASE_URL:', process.env.DATABASE_URL);
 const express = require('express');
-
+const dotenv = require('dotenv')
+dotenv.config({ path: '../.env' });
 const app = express();
 const cors = require('cors')
-const PORT = 3009;
+const PORT = process.env.PORT
 const jwt = require("jsonwebtoken");
 const path = require("path");
 
