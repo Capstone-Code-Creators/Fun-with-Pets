@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+const navigate = useNavigate();
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -6,7 +8,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     
@@ -15,8 +17,32 @@ const RegisterForm = () => {
       return;
     }
 
-    
-    console.log(`Username: ${username}, Email: ${email}, Password: ${password}`);
+    let data;
+    try {
+      const response = await fetch('/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({firstName, lastName, username, email, password})
+      });
+      console.log(response);
+      data = await response.json();
+      
+      // await setToken(`Bearer ${result.token}`);
+      
+      console.log(data)
+      if(response.ok) {
+        const token = data.token;
+        localStorage.setItem('token', token);
+        navigate('/profile');
+        console.log(navigate)
+      } else {
+        console.error(`Login failed`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
