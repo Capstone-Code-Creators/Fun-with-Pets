@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProfileDataFetcher from '../components/ProfileDataFetcher';
-import ProfileDeleteHandler from '../components/ProfileDeleteHandler';
+import ProfileDeleteHandler from "../components/PostsDeleteHandler";
+
 
 const Profile = ({ token }) => {
     const [user, setUser] = useState({});
