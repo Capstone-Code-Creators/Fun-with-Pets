@@ -28,18 +28,18 @@ const Profile = ({ token }) => {
         );
     };
 
-    const formatReplies = (reply) => {
-        return (
-          <div key={`Reply_${reply.id}`}>
-            <h3>Reply #{reply.id}</h3>
-            <ul>
-              <h4>{reply.title}</h4>
-              <p>{reply.content}</p>
-              <h5>Likes: {reply.likes - reply.dilikes}</h5>   
-            </ul>
-          </div>
-        );
-    };  
+    // const formatReplies = (reply) => {
+    //     return (
+    //       <div key={`Reply_${reply.id}`}>
+    //         <h3>Reply #{reply.id}</h3>
+    //         <ul>
+    //           <h4>{reply.title}</h4>
+    //           <p>{reply.content}</p>
+    //           <h5>Likes: {reply.likes - reply.dilikes}</h5>   
+    //         </ul>
+    //       </div>
+    //     );
+    // };  
 
 const handleDeletePost = (postId) => {
   onDeletePost(postId);

@@ -7,9 +7,11 @@ import Profile from './pages/Profile';
 import PetRegisterPage from './pages/PetRegisterPage';
 import Navbar from './components/NavBar';
 import LocalEvents from './pages/LocalEvents';
+import { useState } from 'react';
 import './App.css';
 
 const App = () => {
+  
   return (
     <Router>
       <Navbar />
