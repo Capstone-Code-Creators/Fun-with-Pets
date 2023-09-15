@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
+
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,36 +15,37 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
+
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
 
-    let data;
+
     try {
+      const body = JSON.stringify({ firstName, lastName, username, email, password })
       const response = await fetch('/auth/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({firstName, lastName, username, email, password})
+        headers: { "Content-Type": "application/json" },
+        body,
       });
-      console.log(response);
-      data = await response.json();
-      
+
+      const data = await response.json();
+
       // await setToken(`Bearer ${result.token}`);
-      
+
       console.log(data)
-      if(response.ok) {
+      if (data.token) {
         const token = data.token;
+        console.log(token)
         localStorage.setItem('token', token);
         navigate('/profile');
         console.log(navigate)
-      } else {
-        console.error(`Login failed`);
+      }else{
+        console.log("Login Failed")
       }
     } catch (error) {
+      alert("Username already taken")
       console.error('Error:', error);
     }
   };
@@ -50,6 +54,26 @@ const RegisterForm = () => {
     <div className="register-form">
       {/* <h2>Register</h2> */}
       <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            type="text"
+            id="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input

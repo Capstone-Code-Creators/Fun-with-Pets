@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom'
 
 
 const LogInForm = () => {
-  const navigate = useNavigate()
 
+
+  const navigate = useNavigate()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,7 +14,7 @@ const LogInForm = () => {
 
     let data;
     try {
-      const response = await fetch('/auth/login', {
+      const response = await fetch('/auth/Login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,13 +22,16 @@ const LogInForm = () => {
         body: JSON.stringify({ username, password }),
       });
       console.log(response);
-      data = await response.json();
+      const data = await response.json();
       console.log(data)
-      if(response.ok) {
+      
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('id', data.tokenPayload.id)
         // const token = data.token;
         // localStorage.setItem('token', token);
         navigate('/profile');
-        console.log(navigate)
+        
       } else {
         console.error(`Login failed`);
       }

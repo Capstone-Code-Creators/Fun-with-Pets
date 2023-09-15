@@ -28,7 +28,7 @@ router.post("/Login", async (req, res) => {
 
             const token = jwt.sign(tokenPayload, process.env.JWT);
 
-            res.send({ token });
+            res.send({token, tokenPayload});
 
         } else {
             res.send({ message: "Invalid Login" });
