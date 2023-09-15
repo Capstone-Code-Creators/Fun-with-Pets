@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 const LogInForm = () => {
+  const navigate = useNavigate()
 
   const navigate = useNavigate()
   const [username, setUsername] = useState('');
