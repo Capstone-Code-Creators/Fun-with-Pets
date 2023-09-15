@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfileDeleteHandler = ({ token, posts, setPosts, onDeletePost}) => {
+const PostsDeleteHandler = ({ token, posts, setPosts, onDeletePost}) => {
     const handleDeletePost = async (postId) => {
         try {
         await fetch(`/api/posts/${postId}`, {
@@ -44,4 +44,4 @@ const ProfileDeleteHandler = ({ token, posts, setPosts, onDeletePost}) => {
     );
 };
     
-export default ProfileDeleteHandler;
+export default PostsDeleteHandler;
