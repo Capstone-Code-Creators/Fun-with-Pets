@@ -3,8 +3,6 @@ const { requireUser, requireAdmin } = require("./idRequired");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-//route to get an individual users info by id number
-
 router.get("/:id", requireUser, async (req, res) => {
     try {
       const user = await prisma.user.findUnique({

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import ProfileDataFetcher from '../components/ProfileDataFetcher';
 import ProfileDeleteHandler from '../components/ProfileDeleteHandler';
 
-const Profile = ({ token }) => {
+const Home = ({ token }) => {
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
     const [replies, setReplies] = useState([]);
@@ -67,4 +67,4 @@ const handleDeletePost = (postId) => {
   );
 };
 
-export default Profile;
+export default Home;

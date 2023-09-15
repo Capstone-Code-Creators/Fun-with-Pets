@@ -3,8 +3,6 @@ const { requireUser, requireAdmin } = require("./idRequired");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-
-//get all posts 
 router.get("/", requireUser, async (req, res) => {
     try {
         const posts = await prisma.post.findMany();
@@ -13,7 +11,7 @@ router.get("/", requireUser, async (req, res) => {
         res.send(error)
     }
 })
-//get single post by id
+
 router.get("/:id", requireUser, async (req, res) => {
     try {
         const post = await prisma.post.findUnique({
@@ -31,8 +29,6 @@ router.get("/:id", requireUser, async (req, res) => {
     }
 });
 
-
-//post new post
 router.post("/", requireUser, async (req, res) => {
     try {
         const postData = {
@@ -49,7 +45,7 @@ router.post("/", requireUser, async (req, res) => {
     }
 
 })
-//delete posts that you posted
+
 router.delete("/:id", requireUser, async (req, res) => {
     try {
         const postId = Number(req.params.id);
@@ -70,7 +66,6 @@ router.delete("/:id", requireUser, async (req, res) => {
             },
         });
 
-        // Send a success message
         res.send({ message: "Post deleted successfully" });
 
     } catch (error) {
@@ -78,6 +73,5 @@ router.delete("/:id", requireUser, async (req, res) => {
         res.send({ message: "Internal server error" });
     }
 });
-
 
 module.exports = router;
