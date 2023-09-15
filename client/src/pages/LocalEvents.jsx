@@ -15,7 +15,6 @@ const LocalEvents = () => {
                 <p>map</p>
             </section>
         </section>
-       
     );
 };
 export default LocalEvents;
