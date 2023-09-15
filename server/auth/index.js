@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
     res.send("You have reached the auth router");
 });
 
-
 router.post("/Login", async (req, res) => {
     const { username, password } = req.body;
 

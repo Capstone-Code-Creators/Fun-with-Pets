@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import ProfileDataFetcher from '../components/ProfileDataFetcher';
 import ProfileDeleteHandler from '../components/ProfileDeleteHandler';
 
-// eslint-disable-next-line react/prop-types
 const Profile = ({ token }) => {
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
@@ -24,8 +23,6 @@ const Profile = ({ token }) => {
               <h3>{post.title}</h3>
               <p>{post.content}</p>
               <img src={post.postImg} alt={`Post image ${post.id}`} />
-              {/* <h5>Likes: {post.likes - post.dilikes}</h5>    */}
-              {/* Need to change likes and dislikes to integer values to count em */}
             </ul>
           </div>
         );
@@ -50,17 +47,17 @@ const handleDeletePost = (postId) => {
     
   return (
     <div>
-        {/* User Data */}
+
         {user && formatUser(user)}
-        {/* Create Route for Post page off of button  */}
+
         <button>Create a Post!</button>
 
         <ProfileDataFetcher token={token} setUser={setUser} setPosts={setPosts} setReplies={setReplies} />
-        {/* Render Posts */}
+
         {posts.map((post) => {
             return formatPosts(post);
         })}
-        {/* Render Replies */}
+
         {replies.map((reply) => {
             return formatReplies(reply);
         })}

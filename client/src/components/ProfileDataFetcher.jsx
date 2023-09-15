@@ -5,7 +5,6 @@ const ProfileDataFetcher = ({ token, setUser, setPosts, setReplies }) => {
 
         const fetchData = async () => {
             try {
-                // Fetch user data
                 const userResponse = await fetch("/api/user", {
                     headers: {
                         "Authorization" : `Bearer ${token}`
@@ -14,7 +13,6 @@ const ProfileDataFetcher = ({ token, setUser, setPosts, setReplies }) => {
                 const userData = await userResponse.json();
                 setUser(userData);
 
-                // Fetch posts
                 const postsResponse = await fetch("/api/posts", {
                   headers: {
                     "Authorization": `Bearer ${token}`
@@ -23,7 +21,6 @@ const ProfileDataFetcher = ({ token, setUser, setPosts, setReplies }) => {
                 const postsData = await postsResponse.json();
                 setPosts(postsData);
 
-                // Fetch replies
                 const repliesResponse = await fetch("/api/replies", {
                   headers: {
                     "Authorization": `Bearer ${token}`

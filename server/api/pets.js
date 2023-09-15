@@ -3,7 +3,6 @@ const { requireUser } = require("./idRequired");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-//get all pets
 router.get("/", requireUser, async (req, res) => {
     try {
         const pets = await prisma.pet.findMany();
@@ -13,7 +12,6 @@ router.get("/", requireUser, async (req, res) => {
     }
 })
 
-//get single pet by id
 router.get("/:id", requireUser, async (req, res) => {
     try {
         const pet = await prisma.pet.findUnique({
@@ -31,8 +29,6 @@ router.get("/:id", requireUser, async (req, res) => {
     }
 });
 
-
-//post new pet
 router.post("/", requireUser, async (req, res) => {
     try {
         const petData = {
@@ -49,7 +45,7 @@ router.post("/", requireUser, async (req, res) => {
     }
 
 })
-//delete pets by id
+
 router.delete("/:id", requireUser, async (req, res) => {
     try {
         const petId = Number(req.params.id);
@@ -70,7 +66,6 @@ router.delete("/:id", requireUser, async (req, res) => {
             },
         });
 
-        // Send a success message
         res.send({ message: "Pet deleted successfully" });
 
     } catch (error) {

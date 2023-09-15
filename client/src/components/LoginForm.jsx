@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 
 const LogInForm = () => {
@@ -15,7 +14,7 @@ const LogInForm = () => {
 
   return (
     <section className="login-form">
-      {/* <h2>Login</h2> */}
+
       <form onSubmit={handleSubmit}>
         <section className="form-group">
           <label htmlFor="username">Username:</label>
