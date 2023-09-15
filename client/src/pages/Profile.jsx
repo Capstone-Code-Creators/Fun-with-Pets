@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProfileDataFetcher from '../components/ProfileDataFetcher';
-import ProfileDeleteHandler from "../components/PostsDeleteHandler";
+
+import PostsDeleteHandler from '../components/PostsDeleteHandler';
 
 
 const Profile = ({ token }) => {
@@ -63,7 +64,7 @@ const handleDeletePost = (postId) => {
             return formatReplies(reply);
         })}
 
-        <ProfileDeleteHandler token={token} posts={posts} setPosts={setPosts} onDeletePost={handleDeletePost} replies={replies} setReplies={setReplies} />
+        <PostsDeleteHandler token={token} posts={posts} setPosts={setPosts} onDeletePost={handleDeletePost} replies={replies} setReplies={setReplies} />
     </div>
   );
 };
