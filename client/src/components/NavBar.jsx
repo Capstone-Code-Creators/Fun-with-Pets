@@ -1,7 +1,20 @@
 import { Link } from 'react-router-dom';
 import '../App.css';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
+    const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+    console.log(isUserSignedIn)
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(token) {
+            setIsUserSignedIn(true);
+        } else {
+            setIsUserSignedIn(false);
+        }
+    }, []);
+
     return (
         <nav className="navbar">
             <section className="navbar-menu">
@@ -9,6 +22,11 @@ const Navbar = () => {
                     <li>
                         <Link to="/">Landing</Link>
                     </li>
+                    {!isUserSignedIn && (
+                        <li>
+                            <Link to="/Register">Register</Link>
+                        </li>
+                    )}
                     <li>
                         <Link to="/Home">Home</Link>
                     </li>

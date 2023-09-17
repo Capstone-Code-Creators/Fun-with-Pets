@@ -21,24 +21,25 @@ const LogInForm = () => {
         },
         body: JSON.stringify({ username, password }),
       });
-      console.log(response);
-      const data = await response.json();
-      console.log(data)
       
-      if (data.token) {
+    if(response.ok) {
+        const data = await response.json();
+        console.log(data)
+
+        if (data.token) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('id', data.tokenPayload.id)
-        // const token = data.token;
-        // localStorage.setItem('token', token);
-        navigate('/profile');
-        
-      } else {
-        console.error(`Login failed`);
-      }
-    } catch (error) {
+        navigate('/profile'); 
+        } else {
+          console.error(`Login failed`);
+        }
+    } else {
+      console.error(`Login failed`);
+    } 
+  } catch (error) {
       console.error('Error:', error);
-    }
-  };
+  }
+};
 
   return (
     <section className="login-form">
