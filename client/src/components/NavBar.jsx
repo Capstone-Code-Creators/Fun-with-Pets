@@ -5,6 +5,8 @@ const Navbar = ({ userSignedIn, setUserSignedIn }) => {
     const navigate = useNavigate();
 
     const handleSignOut = () => {
+        localStorage.setItem('token', null);
+        localStorage.setItem('id', null);
         setUserSignedIn(false);
         navigate('/');
     };
