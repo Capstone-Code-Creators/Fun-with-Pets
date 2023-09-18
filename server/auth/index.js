@@ -44,8 +44,7 @@ router.post("/Login", async (req, res) => {
 router.post("/register", async (req, res) => {
     try {
         const user = req.body;
-
-        // user.password = await bcrypt.hash(user.password, 10);
+        user.password = await bcrypt.hash(user.password, 10);
 
         const result = await prisma.user.create({
             data: user,
@@ -54,12 +53,13 @@ router.post("/register", async (req, res) => {
         if (result) {
             const token = jwt.sign({ id: result.id }, process.env.JWT);
 
-            res.status(201).send({ token });
+            res.status(201).send({ user: result, token });
         } else {
-            res.send({ message: "Could not add User" });
+            res.status(400).send({ message: "Could not add User" });
         }
     } catch (error) {
-        res.send(error.message);
+        console.log('Error during registration:', error);
+        res.status(500).send({ message: 'Server error', error: error.message });
     }
 });
 
