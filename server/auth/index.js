@@ -44,7 +44,7 @@ router.post("/Login", async (req, res) => {
 router.post("/register", async (req, res) => {
     try {
         const user = req.body;
-        user.password = await bcrypt.hash(user.password, 10);
+        
 
         const result = await prisma.user.create({
             data: user,
