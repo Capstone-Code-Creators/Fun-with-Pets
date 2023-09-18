@@ -6,7 +6,7 @@ const Navbar = ({ userSignedIn, setUserSignedIn }) => {
 
     const handleSignOut = () => {
         setUserSignedIn(false);
-        navigate('/Login');
+        navigate('/');
     };
 
     return (
