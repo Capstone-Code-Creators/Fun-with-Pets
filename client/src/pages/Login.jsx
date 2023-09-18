@@ -3,19 +3,19 @@ import LoginForm from "../components/LoginForm";
 import { Link } from "react-router-dom";
 import "../App.css";
 
-const Login = () => {
+const Login = ({setUserSignedIn}) => {
   return (
     <section>
         <section className='login-page'>
             <section>
               <h2>Login</h2>
-              <LoginForm />
+              <LoginForm setUserSignedIn={setUserSignedIn}/>
             </section>
             <section id='needRegister'>
               <h3>Need to Register?</h3>
               <section id='registerText'>
                 <Link to="/register">Register</Link>
-                <Link to="/Profile">Profile</Link>
+                {/* <Link to="/Profile">Profile</Link> */}
               </section>
             </section>
         </section>

@@ -244,3 +244,23 @@ h1 {
   flex-direction: column;
   max-width: 130px;
 }
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.sign-out-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 20px;
+}
+
+.sign-out-button:hover {
+  background-color: #c0392b;
+}
