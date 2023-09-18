@@ -12,6 +12,11 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const isEmailValid = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -21,6 +26,10 @@ const RegisterForm = () => {
       return;
     }
 
+    if(!isEmailValid(email)) {
+      alert('Invalid email format!');
+      return;
+    }
 
     try {
       const body = JSON.stringify({ firstName, lastName, username, email, password })
@@ -32,17 +41,19 @@ const RegisterForm = () => {
 
       const data = await response.json();
 
-      // await setToken(`Bearer ${result.token}`);
-
       console.log(data)
-      if (data.token) {
+      
+      if (data.token && data.user) {
         const token = data.token;
-        console.log(token)
+        const user = data.user;
+
         localStorage.setItem('token', token);
+
+        console.log('User registered:', user);
+
         navigate('/profile');
-        console.log(navigate)
       }else{
-        console.log("Login Failed")
+        console.log("Registration Failed")
       }
     } catch (error) {
       alert("Username already taken")
@@ -52,7 +63,6 @@ const RegisterForm = () => {
 
   return (
     <div className="register-form">
-      {/* <h2>Register</h2> */}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="firstName">First Name:</label>

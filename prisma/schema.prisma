@@ -17,7 +17,7 @@ model User {
   lastName String @db.VarChar(50)
   username String @db.VarChar(50) @unique // no repeating usernames
   location String? @db.VarChar(255) // change location to address for more specificity 
-  email String @db.VarChar(50)
+  email String @db.VarChar(255) @unique
   profilePic String? @db.VarChar(255) // longer string for URLs
   password String @db.VarChar(255)
 
