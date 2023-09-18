@@ -1,0 +1,3 @@
+buildCommand: npm i && npm run dev
+environment:
+  NODE_VERSION: 18.17.0
