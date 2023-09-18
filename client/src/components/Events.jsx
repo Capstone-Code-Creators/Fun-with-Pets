@@ -5,7 +5,7 @@ const Events = () => {
     return (
         <section>
             <p>Enter Area Code</p>
-            <input type="text" />
+            
         </section>
     )
 }
