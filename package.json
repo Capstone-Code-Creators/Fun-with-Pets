@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run seed && npm run client:dev",
     "server": "node ./server/index.js",
     "dev": "nodemon ./server/index.js",
+    "client:dev": "cd client && npm run dev",
     "client:build": "cd client && npm run build ",
     "seed": "npx prisma migrate reset"
   },
