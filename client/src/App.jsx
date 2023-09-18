@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar userSignedIn={userSignedIn} />
+      <Navbar userSignedIn={userSignedIn} setUserSignedIn={setUserSignedIn}/>
       <Routes>
         <Route path="/" exact element={<Landing />} />
         <Route path="/Login" element={<Login setUserSignedIn={setUserSignedIn} />} />

@@ -1,7 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 const Navbar = ({ userSignedIn, setUserSignedIn }) => {
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        setUserSignedIn(false);
+        navigate('/Login');
+    };
 
     return (
         <nav className="navbar">
@@ -33,6 +39,13 @@ const Navbar = ({ userSignedIn, setUserSignedIn }) => {
                     )}
                     
                 </ul>
+            </section>
+            <section className="navbar-right">
+                {userSignedIn && (
+                    <button onClick={handleSignOut} className="sign-out-button">
+                        Sign Out
+                    </button>
+                )}
             </section>
         </nav>
     );

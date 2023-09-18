@@ -15,7 +15,7 @@ const Login = ({setUserSignedIn}) => {
               <h3>Need to Register?</h3>
               <section id='registerText'>
                 <Link to="/register">Register</Link>
-                <Link to="/Profile">Profile</Link>
+                {/* <Link to="/Profile">Profile</Link> */}
               </section>
             </section>
         </section>
