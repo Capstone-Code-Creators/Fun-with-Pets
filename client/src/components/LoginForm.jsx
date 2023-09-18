@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 
-const LogInForm = () => {
+const LogInForm = ({ setUserSignedIn }) => {
 
 
   const navigate = useNavigate()
@@ -12,7 +12,6 @@ const LogInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let data;
     try {
       const response = await fetch('/auth/Login', {
         method: 'POST',
@@ -21,20 +20,22 @@ const LogInForm = () => {
         },
         body: JSON.stringify({ username, password }),
       });
-      
-    if(response.ok) {
-        const data = await response.json();
-        console.log(data)
+    
+    console.log(response);
+    const data = await response.json();
+    console.log(data)
 
+    if(response.ok) {
         if (data.token) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('id', data.tokenPayload.id)
         navigate('/profile'); 
+        setUserSignedIn(true);
         } else {
           console.error(`Login failed`);
         }
     } else {
-      console.error(`Login failed`);
+      console.error(`Login failed: ${data.message}`);
     } 
   } catch (error) {
       console.error('Error:', error);

@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -11,13 +11,14 @@ import Home from './pages/Home';
 import './App.css';
 
 const App = () => {
-  
+  const [userSignedIn, setUserSignedIn] = useState(false);
+
   return (
     <Router>
-      <Navbar />
+      <Navbar userSignedIn={userSignedIn} />
       <Routes>
         <Route path="/" exact element={<Landing />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/Login" element={<Login setUserSignedIn={setUserSignedIn} />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Profile" element={<Profile />} />
