@@ -21,22 +21,20 @@ const LogInForm = ({ setUserSignedIn }) => {
         body: JSON.stringify({ username, password }),
       });
     
-    console.log(response);
-    const data = await response.json();
-    console.log(data)
+      const data = await response.json();
 
-    if(response.ok) {
-        if (data.token) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('id', data.tokenPayload.id)
-        navigate('/profile'); 
-        setUserSignedIn(true);
-        } else {
-          console.error(`Login failed`);
-        }
-    } else {
-      console.error(`Login failed: ${data.message}`);
-    } 
+      if(response.ok) {
+          if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('id', data.tokenPayload.id)
+          navigate('/profile'); 
+          setUserSignedIn(true);
+          } else {
+            console.error(`Login failed`);
+          }
+      } else {
+        console.error(`Login failed: ${data.message}`);
+      } 
   } catch (error) {
       console.error('Error:', error);
   }

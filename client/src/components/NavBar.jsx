@@ -15,18 +15,23 @@ const Navbar = ({ userSignedIn, setUserSignedIn }) => {
                             <Link to="/Register">Register</Link>
                         </li>
                     )}
-                    <li>
-                        <Link to="/Home">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/Profile">Profile</Link>
-                    </li>
-                    <li>
-                        <Link to="/PetRegisterPage">Pet Register</Link>
-                    </li>
-                    <li>
-                        <Link to="/LocalEvents">Local Events</Link>
-                    </li>
+                    {userSignedIn && (
+                        <>
+                            <li>
+                                <Link to="/Home">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/Profile">Profile</Link>
+                            </li>
+                            <li>
+                                <Link to="/PetRegisterPage">Pet Register</Link>
+                            </li>
+                            <li>
+                                <Link to="/LocalEvents">Local Events</Link>
+                            </li>
+                        </>
+                    )}
+                    
                 </ul>
             </section>
         </nav>
