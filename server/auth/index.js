@@ -3,7 +3,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const SALT_ROUNDS = 10
 router.get("/", (req, res) => {
     res.send("You have reached the auth router");
 });
@@ -44,14 +44,15 @@ router.post("/Login", async (req, res) => {
 router.post("/register", async (req, res) => {
     try {
         const user = req.body;
-        
-
+        const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS)
+        user.password = hashedPassword
+        console.log(user)
         const result = await prisma.user.create({
             data: user,
         });
-
+        delete result.password
         if (result) {
-            const token = jwt.sign({ id: result.id }, process.env.JWT);
+            const token = jwt.sign(result , process.env.JWT);
 
             res.status(201).send({ user: result, token });
         } else {
