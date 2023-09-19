@@ -26,6 +26,8 @@ const App = () => {
         <Route path="/LocalEvents" element={<LocalEvents />} />
       </Routes>
     </Router>
+    
+    
   );
 }
 
