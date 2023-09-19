@@ -226,8 +226,8 @@ h1 {
 
 #map-container {
   margin-top: 10px;
-  width: 400px;
-  height: 375px;
+  width: 80%;
+  height: 60%;
   border: 1px solid #2c3e50;
   border-radius: 4px;
 }
