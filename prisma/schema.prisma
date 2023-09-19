@@ -13,13 +13,13 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
 
-  firstName String @db.VarChar(50)
-  lastName String @db.VarChar(50)
-  username String @db.VarChar(50) @unique // no repeating usernames
+  firstName String @db.VarChar(255)
+  lastName String @db.VarChar(255)
+  username String @db.VarChar(255) @unique // no repeating usernames
   location String? @db.VarChar(255) // change location to address for more specificity 
   email String @db.VarChar(255) @unique
   profilePic String? @db.VarChar(255) // longer string for URLs
-  password String @db.VarChar(255)
+  password String @db.Text
 
   pets Pet[] //please double check all relations
   posts Post[]

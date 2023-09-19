@@ -1,8 +1,9 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 
-const LogInForm = ({ setUserSignedIn }) => {
+const LogInForm = ({ userSignedIn, setUserSignedIn }) => {
 
 
   const navigate = useNavigate()
@@ -27,8 +28,11 @@ const LogInForm = ({ setUserSignedIn }) => {
           if (data.token) {
           localStorage.setItem('token', data.token);
           localStorage.setItem('id', data.tokenPayload.id)
+          const signin = localStorage.getItem('id')
           navigate('/profile'); 
-          setUserSignedIn(true);
+       
+          setUserSignedIn(signin);
+          
           } else {
             console.error(`Login failed`);
           }
