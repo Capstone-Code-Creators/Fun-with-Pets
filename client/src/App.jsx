@@ -8,10 +8,11 @@ import PetRegisterPage from './pages/PetRegisterPage';
 import Navbar from './components/NavBar';
 import LocalEvents from './pages/LocalEvents';
 import Home from './pages/Home';
+import Feed from './pages/Feed';
 import './App.css';
 
 const App = () => {
-  const [userSignedIn, setUserSignedIn] = useState(false);
+  const [userSignedIn, setUserSignedIn] = useState('');
 
   return (
     <Router>
@@ -20,7 +21,8 @@ const App = () => {
         <Route path="/" exact element={<Landing />} />
         <Route path="/Login" element={<Login setUserSignedIn={setUserSignedIn} />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/Feed" element={<Feed /> } />
+        <Route path="/Register" element={<Register setUserSignedIn={setUserSignedIn} />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/PetRegisterPage" element={<PetRegisterPage />} />
         <Route path="/LocalEvents" element={<LocalEvents />} />

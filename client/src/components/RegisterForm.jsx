@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const RegisterForm = () => {
+const RegisterForm = ({ setUserSignedIn }) => {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -45,9 +45,11 @@ const RegisterForm = () => {
       
       if (data.token && data.user) {
         const token = data.token;
-        const user = data.user;
-
+        const user = data.user.id;
+        localStorage.setItem('id', user)
         localStorage.setItem('token', token);
+        const signin = localStorage.getItem('id')
+        setUserSignedIn(signin)
 
         console.log('User registered:', user);
 

@@ -16,13 +16,7 @@ const ProfileDataFetcher = ({ token, setUser, setPosts, setReplies }) => {
                 const userData = await userResponse.json();
                 setUser(userData);
 
-                const postsResponse = await fetch("/api/posts", {
-                  headers: {
-                    "Authorization": `Bearer ${token}`
-                  }
-                });
-                const postsData = await postsResponse.json();
-                setPosts(postsData);
+           
 
                 // const repliesResponse = await fetch("/api/replies", {
                 //   headers: {
@@ -38,7 +32,7 @@ const ProfileDataFetcher = ({ token, setUser, setPosts, setReplies }) => {
         }
 
         fetchData();
-    }, [setUser, setPosts]);
+    }, [setUser]);
 
     return null; 
 };
