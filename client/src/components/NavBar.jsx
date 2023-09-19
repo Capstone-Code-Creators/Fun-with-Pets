@@ -58,14 +58,17 @@ const Navbar = ({ userSignedIn, setUserSignedIn }) => {
                             </li>
                         </>
                     )}
-
                 </ul>
             </section>
             <section className="navbar-right">
                 {userSignedIn && (
-                    <button onClick={handleSignOut} className="sign-out-button">
+                    <Link 
+                        to="/" 
+                        className="sign-out-button" 
+                        onClick={handleSignOut}
+                    >
                         Sign Out
-                    </button>
+                    </Link>
                 )}
             </section>
         </nav>
@@ -73,4 +76,3 @@ const Navbar = ({ userSignedIn, setUserSignedIn }) => {
 };
 
 export default Navbar;
-

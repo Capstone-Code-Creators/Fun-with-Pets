@@ -7,6 +7,7 @@ const PetRegistrationForm = () => {
         breed: '',
         gender: '',
     });
+    const [previewURL, setPreviewURL] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -17,15 +18,27 @@ const PetRegistrationForm = () => {
     };
 
     const handleFileChange = (e) => {
+        const file = e.target.files[0];
         setFormData((prevState) => ({
             ...prevState,
-            photo: e.target.files[0],
+            photo: file,
         }));
+
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setPreviewURL(reader.result);
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            setPreviewURL(null);
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         console.log(formData);
     };
 
@@ -52,6 +65,7 @@ const PetRegistrationForm = () => {
                     required
                 />
             </section>
+
             <section className='pet-form'>
                 <section id="pet-gender">
                     <label>Gender:</label>
@@ -66,17 +80,21 @@ const PetRegistrationForm = () => {
                         <option value="female">Female</option>
                     </select>
                 </section>
+
                 <section id="pet-photo">
-                    <label>Add Photo:</label>
-                    <input
+                    <label id='pet-label'>Add Photo:</label>
+                    <input 
+                        id='pet-input-box'
                         type="file"
                         name="photo"
                         onChange={handleFileChange}
                         required
                     />
+                    {previewURL && <img src={previewURL} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px' }} />}
                 </section>
-                <section id="pet-submit">
-                    <button type="submit">Register Pet</button>
+
+                <section >
+                    <button id="pet-submit" type="submit">Register Pet</button>
                 </section>
             </section>
         </form>

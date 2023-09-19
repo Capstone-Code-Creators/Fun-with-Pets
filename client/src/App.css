@@ -1,6 +1,16 @@
+
+
+
+/* Reset */
 * {
   margin: 0;
   box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
 }
 
 .app {
@@ -9,14 +19,9 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
 }
 
-h1 {
-  margin-bottom: 20px;
-}
-
+/* Buttons */
 .button-group {
   display: flex;
   gap: 10px;
@@ -29,12 +34,12 @@ h1 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  color: white;
   transition: background-color 0.3s ease;
 }
 
 .login-button {
   background-color: #3498db;
-  color: white;
 }
 
 .login-button:hover {
@@ -43,13 +48,13 @@ h1 {
 
 .register-button {
   background-color: #2ecc71;
-  color: white;
 }
 
 .register-button:hover {
   background-color: #27ae60;
 }
 
+/* Forms */
 .login-form,
 .register-form,
 .pet-register-form {
@@ -69,8 +74,8 @@ h1 {
 }
 
 .form-group label {
-  text-align: center;
   display: block;
+  text-align: center;
   margin-bottom: 5px;
 }
 
@@ -81,15 +86,16 @@ h1 {
   border-radius: 4px;
 }
 
+/* Landing Page Styles */
 .landing-page,
 .login-page,
 .register-page,
 .local-events {
-  text-align: center;
-  margin-top: 10vh;
   display: flex;
   flex-direction: column;
-  }
+  text-align: center;
+  margin-top: 10vh;
+}
 
 .landing-links,
 #needRegister,
@@ -98,18 +104,9 @@ h1 {
   flex-direction: column;
   font-size: larger;
   margin: 20px;
-  /* background-color: #2980b9; */
+}
 
-}
-#login-link {
-  background-color: #2c3e50;
-  border-radius: 4px;
-  color: #ffffff;
-  text-decoration: none;
-  margin: 10px auto;
-  width: 100px;
-  height: 25px; 
-}
+#login-link,
 #register-link {
   background-color: #2c3e50;
   border-radius: 4px;
@@ -120,20 +117,15 @@ h1 {
   height: 25px; 
 }
 
-#login-link:hover {
-    border: 1px solid gray;
-    border-radius: 4px;
-    box-shadow: 2px 2px 4px #aaa;
-    transition: all 0.3s ease;   
-}
-
+#login-link:hover,
 #register-link:hover {
   border: 1px solid gray;
   border-radius: 4px;
   box-shadow: 2px 2px 4px #aaa;
-  transition: all 0.3s ease;  
+  transition: all 0.3s ease;   
 }
 
+/* Profile Styles */
 .profile {
   text-align: center;
   display: flex;
@@ -153,14 +145,7 @@ h1 {
   width: 100px;
 }
 
-#dynamicTextarea {
-  overflow-y: scroll;
-  max-width: 300px;
-  width: 90%;
-  height: 50px;
-  margin: 0 auto;
-}
-
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -191,36 +176,32 @@ h1 {
   background-color: #34495e;
 }
 
-
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-  }
-
-  .navbar-menu ul {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  h1 {
-    font-size: 1.2rem;
-  }
-
-  .login-button,
-  .register-button {
-    padding: 12px 24px;
-  }
-
-  .form-group input {
-    padding: 12px;
-  }
+.navbar-right {
+  display: flex;
+  align-items: center;
 }
 
+.sign-out-button {
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.sign-out-button:hover {
+  background-color: #537395;
+}
+
+/* Map and Pet Registration Form */
 .local-events {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   padding: 5px;
 }
 
@@ -235,32 +216,81 @@ h1 {
 .pet-form {
   display: flex;
   flex-direction: column;
-  margin: 5px;
+  align-items: center;
+  margin: 10px;
 }
 
-#pet-gender {
+#pet-submit {
+  margin: 10px;
+  background-color: #2c3e50;
+  color: white;
+  height: 25px;
+  width: 100px;
+  border-radius: 4px;
+}
+
+#pet-gender,
+#pet-photo {
   text-align: center;
   display: flex;
   flex-direction: column;
-  max-width: 130px;
+  margin: 15px;
 }
 
-.navbar-right {
+#pet-input-box {
+  margin: 10px;
+  border: 1px solid gray;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.sign-out-button {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: 20px;
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
 }
 
-.sign-out-button:hover {
-  background-color: #c0392b;
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
 }
+
+.close:hover {
+  color: #000;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .login-button,
+  .register-button {
+    padding: 12px 24px;
+  }
+
+  .form-group input {
+    padding: 12px;
+  }
+  
+  .navbar-menu ul {
+    gap: 10px;
+  }
+}
+
