@@ -17,18 +17,6 @@ const Profile = ({ token }) => {
         )
     }
 
-    const formatPosts = (post) => {
-        return (
-          <div key={`Post_${post.id}`}>
-            <h2>Post #{post.id}</h2>
-            <ul>
-              <h3>{post.title}</h3>
-              <p>{post.content}</p>
-              <img src={post.postImg} alt={`Post image ${post.id}`} />
-            </ul>
-          </div>
-        );
-    };
 
     // const formatReplies = (reply) => {
     //     return (
@@ -56,9 +44,7 @@ const handleDeletePost = (postId) => {
 
         <ProfileDataFetcher token={token} setUser={setUser} setPosts={setPosts} setReplies={setReplies} />
 
-        {posts.map((post) => {
-            return formatPosts(post);
-        })}
+     
 
         {replies.map((reply) => {
             return formatReplies(reply);

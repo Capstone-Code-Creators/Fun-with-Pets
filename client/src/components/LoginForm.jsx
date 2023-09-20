@@ -1,8 +1,9 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 
-const LogInForm = ({ setUserSignedIn }) => {
+const LogInForm = ({ userSignedIn, setUserSignedIn }) => {
 
   const navigate = useNavigate()
   const [username, setUsername] = useState('');
@@ -27,9 +28,12 @@ const LogInForm = ({ setUserSignedIn }) => {
           if (data.token) {
           localStorage.setItem('token', data.token);
           localStorage.setItem('id', data.tokenPayload.id)
-          console.log('loginStorage token set:', localStorage.getItem('token'));
+          const signin = localStorage.getItem('id')
+
           navigate('/profile'); 
-          setUserSignedIn(true);
+       
+          setUserSignedIn(signin);
+          
           } else {
             console.error(`Login failed: Token not received`);
           }
