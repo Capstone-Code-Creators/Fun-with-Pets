@@ -37,9 +37,36 @@ const PetRegistrationForm = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        
+        try {
+            const petFormData = new FormData();
+            petFormData.append('name', formData.name);
+            petFormData.append('breed', formData.breed);
+            petFormData.append('gender', formData.gender);
+            petFormData.append('photo', formData.photo);
+
+            const token = localStorage.getItem("token");
+
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            }
+
+            const response = await fetch('/api/pets', {
+                method: 'POST',
+                headers: headers,
+                body: petFormData,
+            });
+
+            if(response.ok){
+                console.log('Pet registered successfully');
+            } else {
+                console.error('Error registering pet');
+            }
+        } catch (error) {
+            console.error('Error registering pet: ', error);
+        }
     };
 
     return (
