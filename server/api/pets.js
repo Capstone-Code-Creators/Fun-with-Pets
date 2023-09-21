@@ -31,15 +31,25 @@ router.get("/:id", requireUser, async (req, res) => {
     }
 });
 
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", async (req, res) => { //verifyToken, 
     try {
-        
+        console.log(req.body);
+
         const petData = {
             ...req.body,
+            
             userId: req.userId,
         };
+
+        // console.log(petData);
         const pet = await prisma.pet.create({
-            data: petData,
+            data: {
+                userId: req.userId,
+                name: petData.name,
+                breed: petData.breed,
+                gender: petData.gender,
+                photo: petData.photo,
+            }
         })
         console.log(pet);
         res.status(201).send(pet);

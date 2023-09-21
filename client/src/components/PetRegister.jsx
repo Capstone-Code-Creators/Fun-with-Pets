@@ -6,6 +6,7 @@ const PetRegistrationForm = () => {
         name: '',
         breed: '',
         gender: '',
+        photo: '',
     });
     const [previewURL, setPreviewURL] = useState(null);
 
@@ -17,48 +18,55 @@ const PetRegistrationForm = () => {
         }));
     };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setFormData((prevState) => ({
-            ...prevState,
-            photo: file,
-        }));
+    // const handleFileChange = (e) => {
+    //     const file = e.target.files[0];
+    //     setFormData((prevState) => ({
+    //         ...prevState,
+    //         photo: file,
+    //     }));
 
-        const reader = new FileReader();
+        // const reader = new FileReader();
 
-        reader.onloadend = () => {
-            setPreviewURL(reader.result);
-        }
+        // reader.onloadend = () => {
+        //     setPreviewURL(reader.result);
+        // }
 
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            setPreviewURL(null);
-        }
-    };
+        // if (file) {
+        //     reader.readAsDataURL(file);
+        // } else {
+        //     setPreviewURL(null);
+        // }
+    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         try {
-            const petFormData = new FormData();
-            petFormData.append('name', formData.name);
-            petFormData.append('breed', formData.breed);
-            petFormData.append('gender', formData.gender);
-            petFormData.append('photo', formData.photo);
+            const petFormData = {
+                name: formData.name,
+                breed: formData.breed,
+                gender: formData.gender,
+                photo: formData.photo
+            };
+
+
+            // for (const [key, value] of petFormData.entries()) {
+            //     console.log(`${key}: ${value}`);
+            // }
 
             const token = localStorage.getItem("token");
 
             const headers = {
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             }
-
+            console.log(petFormData);
             const response = await fetch('/api/pets', {
                 method: 'POST',
                 headers: headers,
-                body: petFormData,
+                body: JSON.stringify(petFormData),
             });
-
+            console.log(response);
             if(response.ok){
                 console.log('Pet registered successfully');
             } else {
@@ -112,10 +120,9 @@ const PetRegistrationForm = () => {
                     <label id='pet-label'>Add Photo:</label>
                     <input 
                         id='pet-input-box'
-                        type="file"
+                        type='text'
                         name="photo"
-                        onChange={handleFileChange}
-                        required
+                        onChange={handleChange}
                     />
                     {previewURL && <img src={previewURL} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px' }} />}
                 </section>
