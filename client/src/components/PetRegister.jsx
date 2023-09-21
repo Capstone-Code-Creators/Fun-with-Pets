@@ -18,26 +18,6 @@ const PetRegistrationForm = () => {
         }));
     };
 
-    // const handleFileChange = (e) => {
-    //     const file = e.target.files[0];
-    //     setFormData((prevState) => ({
-    //         ...prevState,
-    //         photo: file,
-    //     }));
-
-        // const reader = new FileReader();
-
-        // reader.onloadend = () => {
-        //     setPreviewURL(reader.result);
-        // }
-
-        // if (file) {
-        //     reader.readAsDataURL(file);
-        // } else {
-        //     setPreviewURL(null);
-        // }
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -48,11 +28,6 @@ const PetRegistrationForm = () => {
                 gender: formData.gender,
                 photo: formData.photo
             };
-
-
-            // for (const [key, value] of petFormData.entries()) {
-            //     console.log(`${key}: ${value}`);
-            // }
 
             const token = localStorage.getItem("token");
 
