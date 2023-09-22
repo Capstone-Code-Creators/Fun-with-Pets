@@ -30,7 +30,7 @@ model Pet {
   id Int @id @default(autoincrement())
   name String @db.VarChar(50)
   breed String? @db.VarChar(50)
-  gender String
+  gender String @default("male") 
   photo String @db.VarChar(255)
   userId Int
   // type String @db.VarChar(50)

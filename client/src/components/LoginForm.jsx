@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 
 const LogInForm = ({ userSignedIn, setUserSignedIn }) => {
 
-
   const navigate = useNavigate()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -13,6 +12,7 @@ const LogInForm = ({ userSignedIn, setUserSignedIn }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log('Attempting login...');
     try {
       const response = await fetch('/auth/Login', {
         method: 'POST',
@@ -29,12 +29,13 @@ const LogInForm = ({ userSignedIn, setUserSignedIn }) => {
           localStorage.setItem('token', data.token);
           localStorage.setItem('id', data.tokenPayload.id)
           const signin = localStorage.getItem('id')
+
           navigate('/profile'); 
        
           setUserSignedIn(signin);
           
           } else {
-            console.error(`Login failed`);
+            console.error(`Login failed: Token not received`);
           }
       } else {
         console.error(`Login failed: ${data.message}`);
