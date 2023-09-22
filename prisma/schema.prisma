@@ -24,7 +24,6 @@ model User {
   pets Pet[] //please double check all relations
   posts Post[]
   replies Reply[]
-
   events EventUsers[]
   // event Event @relation(fields: [eventUserId], references: [id])
   // eventUserId Int
@@ -58,7 +57,7 @@ model Reply {
   id Int @id @default(autoincrement())
   content String @db.Text
   postId Int
-  post Post @relation(fields: [postId], references: [id]) // double check these references, please
+  post Post @relation(fields: [postId], references: [id])
   userId Int
   user User @relation(fields: [userId], references: [id])
 }
@@ -81,5 +80,5 @@ model EventUsers {
   location String? @db.VarChar(255)
   event Event @relation(fields: [eventId], references:[id])
   user User @relation(fields: [userId], references:[id])
-  @@unique([eventId, userId])
+  @@unique([eventId, userId]) //look into this, does this function?
 }
