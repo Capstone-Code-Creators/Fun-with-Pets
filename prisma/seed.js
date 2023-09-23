@@ -161,6 +161,19 @@ const main = async () => {
         },
     });
 
+    await prisma.event.create({
+        data: {
+            title: "Fido's 10th Birthday",
+            description: "Come celebrate Fido's 10th birthday. Meet at Middlegrounds Metro Park, south of the playground.",
+            location: "Middlegrounds Metro Park, 111 Ottawa St, Toledo, OH 43604",
+            users: {
+                connect: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 },] 
+              },
+              pets: {
+                connect: [{ id: 1 }, { id: 3 },{ id: 4 }, { id: 5 }] 
+              }
+        }
+    })
 };
 
 main();

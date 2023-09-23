@@ -80,6 +80,6 @@ model EventUsers {
   // location String? @db.VarChar(255)
   event Event @relation(fields: [eventId], references:[id])
   user User @relation(fields: [userId], references:[id])
-  @@unique([eventId, userId]) 
+  @@unique ([eventId, userId]) 
 }
 
