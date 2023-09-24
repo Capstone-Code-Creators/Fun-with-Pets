@@ -6,6 +6,7 @@ const PetRegistrationForm = () => {
         name: '',
         breed: '',
         gender: '',
+        photo: '',
     });
     const [previewURL, setPreviewURL] = useState(null);
 
@@ -17,29 +18,38 @@ const PetRegistrationForm = () => {
         }));
     };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setFormData((prevState) => ({
-            ...prevState,
-            photo: file,
-        }));
-
-        const reader = new FileReader();
-
-        reader.onloadend = () => {
-            setPreviewURL(reader.result);
-        }
-
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            setPreviewURL(null);
-        }
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        
+        try {
+            const petFormData = {
+                name: formData.name,
+                breed: formData.breed,
+                gender: formData.gender,
+                photo: formData.photo
+            };
+
+            const token = localStorage.getItem("token");
+
+            const headers = {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+            console.log(petFormData);
+            const response = await fetch('/api/pets', {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(petFormData),
+            });
+            console.log(response);
+            if(response.ok){
+                console.log('Pet registered successfully');
+            } else {
+                console.error('Error registering pet');
+            }
+        } catch (error) {
+            console.error('Error registering pet: ', error);
+        }
     };
 
     return (
@@ -85,10 +95,9 @@ const PetRegistrationForm = () => {
                     <label id='pet-label'>Add Photo:</label>
                     <input 
                         id='pet-input-box'
-                        type="file"
+                        type='text'
                         name="photo"
-                        onChange={handleFileChange}
-                        required
+                        onChange={handleChange}
                     />
                     {previewURL && <img src={previewURL} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px' }} />}
                 </section>

@@ -1,14 +1,10 @@
-import Posts from "../components/posts"
+import Posts from '../components/posts';
 
 const Feed = () => {
-
-
-    
     return (
         <>
-            <Posts /> 
+            <Posts />
         </>
-
-    )
-}
-export default Feed 
+    );
+};
+export default Feed;

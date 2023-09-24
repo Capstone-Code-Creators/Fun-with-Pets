@@ -28,11 +28,12 @@ model User {
 
 model Pet {
   id Int @id @default(autoincrement())
-  type String @db.VarChar(50)
-  breed String? @db.VarChar(50)
   name String @db.VarChar(50)
-  image String @db.VarChar(255)
+  breed String? @db.VarChar(50)
+  gender String @default("male") 
+  photo String @db.VarChar(255)
   userId Int
+  // type String @db.VarChar(50)
   user User @relation(fields: [userId], references: [id])
 }
 
