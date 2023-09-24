@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   });
 
 
-app.use(express.static(path.join(__dirname, "..", "client/dist")));
+app.use(express.static(path.join(__dirname, "..", "client/dist/")));
 
 // app.get('*.jsx', (req, res) => {
 //   res.setHeader('Content-Type', 'application/javascript');
