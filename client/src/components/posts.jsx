@@ -7,6 +7,7 @@ const Posts = () => {
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
     const [content, setContent] = useState('');
+    const [title, setTitle] = useState("");
     const [postImg, setImage] = useState('');
     const [currentCommentText, setCurrentCommentText] = useState('');
 
@@ -19,7 +20,7 @@ const Posts = () => {
             try {
                 const response = await fetch('/api/posts', {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        "Authorization": `Bearer ${token}`,
                     },
                 });
                 const data = await response.json();
@@ -30,6 +31,39 @@ const Posts = () => {
         };
         fetchPosts();
     }, [token]);
+    const addPost = async (e) => {
+        e.preventDefault();
+    
+        const body = JSON.stringify({ title, content, postImg });
+        const response = await fetch('/api/posts', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body,
+        });
+        const data = await response.json()
+        console.log(data)
+    
+        if (response.ok) {
+          
+          setTitle("");
+          setContent("");
+          setImage("");
+          
+          // Fetch the updated list of posts
+          const updatedPostsResponse = await fetch("/api/posts", {
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+          });
+          const updatedPostsData = await updatedPostsResponse.json();
+          setPosts(updatedPostsData);
+        } else {
+          console.error('Failed to add a new post.');
+        }
+      }
 
     const handleLike = (postId) => {
         setLikeCounts(prev => ({
@@ -62,7 +96,29 @@ const Posts = () => {
             <section className="post-container">
                 <h1 id="post-title">What's on your mind...</h1>
                 <section id="post-details">
-                    {/* TODO: Add the addPost function and form */}
+                <p>Tell us about your pet.</p>
+          <form onSubmit={addPost}>
+            <label>Title: </label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <label>Content: </label>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+            ></textarea>
+            <label>Image URL: </label>
+            <input
+              type="text"
+              value={postImg}
+              onChange={(e) => setImage(e.target.value)}
+            />
+            <button type="submit">Submit</button>
+          </form>
                 </section>
             </section>
             <section className="feed">

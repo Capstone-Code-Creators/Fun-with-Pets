@@ -31,34 +31,30 @@ router.get("/:id", requireUser, async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => { //verifyToken, 
-    try {
-        console.log(req.body);
 
+router.post("/", requireUser, async (req, res) => {
+    try {
         const petData = {
             ...req.body,
-            
             userId: req.userId,
         };
-
-        // console.log(petData);
         const pet = await prisma.pet.create({
-            data: {
-                userId: req.userId,
-                name: petData.name,
-                breed: petData.breed,
-                gender: petData.gender,
-                photo: petData.photo,
-            }
-        })
-        console.log(pet);
-        res.status(201).send(pet);
+            data: petData,
+        });
+        console.log(pet)
+        res.send(pet)
     } catch (error) {
-        console.error("Error creating pet:", error);
-        res.status(500).send(error);
+        if (error) {
+            // Handle Prisma validation error, e.g., log it or send an appropriate response
+            console.error("Prisma validation error:", error.message);
+            res.status(400).json({ error: "Validation error" });
+        } else {
+            // Handle other errors
+            console.error("Other error:", error);
+            res.status(500).json({ error: "An internal server error occurred" });
+        }
     }
-
-});
+})    
 
 router.delete("/:id", requireUser, async (req, res) => {
     try {

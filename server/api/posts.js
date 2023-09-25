@@ -28,6 +28,22 @@ router.get("/:id", requireUser, async (req, res) => {
         res.send(error);
     }
 });
+router.get("/user/:userId", requireUser, async (req, res) => {
+    try {
+        const userId = Number(req.params.userId);
+
+        const userPosts = await prisma.post.findMany({
+            where: {
+                userId: userId,
+            },
+        });
+
+        res.send(userPosts);
+    } catch (error) {
+        console.error("Error fetching user posts:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 router.post("/", requireUser, async (req, res) => {
     try {

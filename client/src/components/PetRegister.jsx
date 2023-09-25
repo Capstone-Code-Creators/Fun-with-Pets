@@ -35,13 +35,14 @@ const PetRegistrationForm = () => {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             }
-            console.log(petFormData);
+           
             const response = await fetch('/api/pets', {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify(petFormData),
             });
-            console.log(response);
+            const data = await response.json()
+            console.log(data);
             if(response.ok){
                 console.log('Pet registered successfully');
             } else {
