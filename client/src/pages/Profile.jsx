@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import ProfileDataFetcher from '../components/ProfileDataFetcher';
 
 import PostsDeleteHandler from '../components/PostsDeleteHandler';
-
+import ProfileContent from '../components/ProfilePage';
 
 const Profile = ({ token }) => {
     const [user, setUser] = useState({});
@@ -14,45 +14,46 @@ const Profile = ({ token }) => {
             <>
                 <h2>Welcome, {user.firstName}</h2>
             </>
-        )
-    }
+        );
+    };
 
+    const formatReplies = (reply) => {
+        return (
+            <div key={`Reply_${reply.id}`}>
+                <h3>Reply #{reply.id}</h3>
+                <ul>
+                    <h4>{reply.title}</h4>
+                    <p>{reply.content}</p>
+                    <h5>Likes: {reply.likes - reply.dilikes}</h5>
+                </ul>
+            </div>
+        );
+    };
 
-    // const formatReplies = (reply) => {
-    //     return (
-    //       <div key={`Reply_${reply.id}`}>
-    //         <h3>Reply #{reply.id}</h3>
-    //         <ul>
-    //           <h4>{reply.title}</h4>
-    //           <p>{reply.content}</p>
-    //           <h5>Likes: {reply.likes - reply.dilikes}</h5>   
-    //         </ul>
-    //       </div>
-    //     );
-    // };  
+    const handleDeletePost = (postId) => {
+        onDeletePost(postId);
+    };
 
-const handleDeletePost = (postId) => {
-  onDeletePost(postId);
-}
-    
-  return (
-    <div>
+    return (
+        <div>
+            {user && formatUser(user)}
 
-        {user && formatUser(user)}
+            <button>Create a Post!</button>
 
-        <button>Create a Post!</button>
+            <ProfileDataFetcher
+                token={token}
+                setUser={setUser}
+                setPosts={setPosts}
+                setReplies={setReplies}
+            />
 
-        <ProfileDataFetcher token={token} setUser={setUser} setPosts={setPosts} setReplies={setReplies} />
+            <ProfileContent setUser={setUser} user={user} />
 
-     
-
-        {replies.map((reply) => {
-            return formatReplies(reply);
-        })}
-
-        <PostsDeleteHandler token={token} posts={posts} setPosts={setPosts} onDeletePost={handleDeletePost} replies={replies} setReplies={setReplies} />
-    </div>
-  );
+            {replies.map((reply) => {
+                return formatReplies(reply);
+            })}
+        </div>
+    );
 };
 
 export default Profile;

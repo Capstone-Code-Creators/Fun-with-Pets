@@ -13,6 +13,7 @@
     "seed": "node ./prisma/seed.js",
     "migrate": "npx prisma migrate deploy",
     "reset": "npx prisma migrate reset"
+
   },
 
   "keywords": [],
