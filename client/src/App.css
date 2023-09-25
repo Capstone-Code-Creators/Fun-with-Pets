@@ -148,66 +148,6 @@ body {
   width: 100px;
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #2c3e50;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-menu ul {
-  text-align: center;
-  width: 100%;
-  list-style-type: none;
-  padding: 7px;
-  margin: 0;
-  display: flex;
-  gap: 20px;
-  text-align: center;
-}
-
-.navbar-menu li a {
-  justify-content: baseline;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  color: #ecf0f1;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.navbar-menu li a:hover {
-  background-color: #537395;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-  text-align: center;
-}
-
-.sign-out-button {
-  background-color: #2c3e50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-left: 20px;
-  text-decoration: none;
-}
-
-.sign-out-button:hover {
-  background-color: #537395;
-}
-
 /* Map and Pet Registration Form */
 .local-events {
   display: flex;
@@ -540,4 +480,80 @@ body {
   width: 80%;
   height: auto;
   margin: auto;
+}
+
+
+.navbar {
+  align-items: center;
+  width: 120px;
+  background-color: #3c5976;
+  width: 100%;
+  text-align: center;
+}
+
+.navbar-menu {
+  position: relative; /* Add this line to make the position of the dropdown relative to this container */
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+}
+.navbar-menu button {
+  z-index: 2; /* Ensure the button stays on top of the dropdown */
+}
+
+.navbar-menu ul {
+  display: none;
+  position: absolute;
+  color: white;
+  background-color: #3c5976;
+  border: 1px solid #ccc;
+  z-index: 1;
+  list-style-type: none;
+  margin-top: 55px;
+  width: 25%;
+  padding: 0;
+  
+}
+
+.navbar-menu:hover ul {
+  display: flex; /* Display the dropdown when hovering over the .navbar-menu */
+}
+
+.navbar-menu li a {
+  /* justify-content: baseline; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #ecf0f1;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  width: 100%; /* Take full width of the list item */
+  text-align: center; /* Center the text */
+}
+
+.navbar button {
+  width: 100px;
+  height: 50px;
+  
+}
+
+
+
+.navbar-menu:hover ul {
+  display: block;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.navbar-menu ul li {
+  padding: 10px;
+  cursor: pointer;
+  display: flex; /* Convert the list item into a flex container */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.navbar-menu li a:hover {
+  background-color: #537395;
 }
