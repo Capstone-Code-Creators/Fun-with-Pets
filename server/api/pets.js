@@ -30,6 +30,22 @@ router.get("/:id", requireUser, async (req, res) => {
         res.send(error);
     }
 });
+router.get("/userpets/:userId", requireUser, async (req, res) => {
+    try {
+        const userId = Number(req.params.userId);
+
+        const userPets = await prisma.pet.findMany({
+            where: {
+                userId: userId,
+            },
+        });
+
+        res.send(userPets);
+    } catch (error) {
+        console.error("Error fetching user posts:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 
 router.post("/", requireUser, async (req, res) => {

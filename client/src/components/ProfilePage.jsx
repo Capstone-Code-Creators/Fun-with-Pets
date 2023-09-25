@@ -1,5 +1,6 @@
 import IndividualPostsFetcher from './IndividualPostsFetcher';
 import { useState, useEffect } from 'react';
+import PetFetcher from './PetFetcher';
 const ProfileContent = ({setUser, user}) => {
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -39,7 +40,7 @@ const ProfileContent = ({setUser, user}) => {
                     </div>
                 )}
                 <IndividualPostsFetcher /> 
-
+                    <PetFetcher />
             </div>
         </>
 
