@@ -69,7 +69,7 @@ const main = async () => {
             name: "Scooby Doo",
             gender: "male",
             photo: "https://qph.cf2.quoracdn.net/main-qimg-8e595dad8bd78189b295a0034b6490f6.webp",
-            userId: 1,
+            userId: user1.id,
         },
     });
     await prisma.pet.create({
@@ -79,7 +79,7 @@ const main = async () => {
             name: "Odie",
             gender: "male",
             photo: "https://en.wikipedia.org/wiki/Odie#/media/File:Odie_the_Dog.svg",
-            userId: 2,
+            userId: user2.id,
         },
     });
     await prisma.pet.create({
@@ -89,7 +89,7 @@ const main = async () => {
             name: "Garfield",
             gender: "male",
             photo: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/06/19/09/garfield.jpg?width=1200&height=1200&fit=crop",
-            userId: 2,
+            userId: user2.id,
         },
     });
     await prisma.pet.create({
@@ -99,7 +99,7 @@ const main = async () => {
             name: "Hyde",
             gender: "male",
             photo: "https://en.wikipedia.org/wiki/Wolf#/media/File:Eurasian_wolf_2.jpg",
-            userId: 3,
+            userId: user3.id,
         },
     });
     await prisma.pet.create({
@@ -109,7 +109,7 @@ const main = async () => {
             name: "Ozzy",
             gender: "male",
             photo: "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcRG87OqwveVRysa7M-3cPvsmaCfrwLKJMJ9h7skQZKXoTSIOx-Z9DOqEwjcEn2q_jtUu2NWHAhJkoGC9iE",
-            userId: 4,
+            userId: user4.id,
         },
     });
     await prisma.pet.create({
@@ -119,7 +119,7 @@ const main = async () => {
             name: "Celeste",
             gender: "female",
             photo: "https://www.waikikiaquarium.org/wp-content/uploads/2013/11/moorish_idol_620.jpg",
-            userId: 5,
+            userId: user5.id,
         },
     });
     await prisma.pet.create({
@@ -129,7 +129,7 @@ const main = async () => {
             name: "Drakaris",
             gender: "female",
             photo: "https://media.thebeardeddragon.org/images/sandfire-red-bearded-dragon-close-up-sz4.jpg",
-            userId: 5,
+            userId: user5.id,
         },
     });
 
