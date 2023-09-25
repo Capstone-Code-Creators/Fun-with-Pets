@@ -20,34 +20,25 @@ router.post("/Login", async (req, res) => {
     });
 
     if (user) {
-        // const passwordMatch = await bcrypt.compare(password, user.password);
+        const tokenPayload = {
+            id: user.id,
+        };
 
-        // if (passwordMatch) {
-            const tokenPayload = {
-                id: user.id,
-            };
+        const token = jwt.sign(tokenPayload, process.env.JWT);
 
-            const token = jwt.sign(tokenPayload, process.env.JWT);
+        res.send({token, tokenPayload});
 
-            res.send({token, tokenPayload});
+    } else {
+        res.send({ message: "Invalid Login" });
+    }
 
-        } else {
-            res.send({ message: "Invalid Login" });
-        }
-    // } else {
-    //     res.send({ message: "User not found" });
-    // }
 });
-
-
-
 
 router.post("/register", async (req, res) => {
     try {
         const user = req.body;
         const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS)
         user.password = hashedPassword
-        console.log(user)
         const result = await prisma.user.create({
             data: user,
         });

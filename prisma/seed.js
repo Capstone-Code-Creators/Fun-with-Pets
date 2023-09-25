@@ -2,6 +2,7 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 const bcrypt = require('bcryptjs');
 const main = async () => {
+    
     // CREATE USERS
     const user1 = await prisma.user.create({
         data: {
@@ -11,7 +12,6 @@ const main = async () => {
             location: "Crystal Cove, California",
             email: "makingSandwichesShaggy@mysteryinc.com",
             profilePic: "https://static.wikia.nocookie.net/oneyplays/images/8/82/Shaggy_Rogers.png/revision/latest/scale-to-width-down/1000?cb=20180907203725",
-            // password: await bcrypt.hash("ripCaseyKasem2014", 10)
             password: "ripCaseyKasem2014",
         },
     });
@@ -23,7 +23,6 @@ const main = async () => {
             location: "Muncie, Indiana",
             email: "poorCartoonist@pawsinc.com",
             profilePic: "https://i.kym-cdn.com/entries/icons/original/000/039/527/jon-arbuckle-dancing.jpg",
-            // password: await bcrypt.hash("dontHitOdie1976", 5),
             password: "dontHitOdie1976"
         },
     });
@@ -34,7 +33,6 @@ const main = async () => {
             username: "TommyB",
             location: "Mineapolis, Minnesota",
             email: "TommyB@petbook.com",
-            // password: await bcrypt.hash("TOMMYB123", 5),
             password: "TOMMYB123",
         },
     });
@@ -45,7 +43,6 @@ const main = async () => {
             username: "BooneW",
             location: "Toledo, Ohio",
             email: "BooneW@petbook.com",
-            // password: await bcrypt.hash("BOONEW123", 5),
             password: "BOONEW123",
         },
     });
@@ -56,7 +53,6 @@ const main = async () => {
             username: "NathanK",
             location: "Queens, New York",
             email: "NateK@petbook.com",
-            // password: await bcrypt.hash("NathanK123", 5),
             password: "NATHANK123",
         },
     });
@@ -64,7 +60,6 @@ const main = async () => {
     //CREATE PETS
     await prisma.pet.create({
         data: {
-            // type: "Dog",
             breed: "Great Dane",
             name: "Scooby Doo",
             gender: "male",
@@ -74,7 +69,6 @@ const main = async () => {
     });
     await prisma.pet.create({
         data: {
-            // type: "Dog",
             breed: "Dachschund/Terrier Mix",
             name: "Odie",
             gender: "male",
@@ -84,7 +78,6 @@ const main = async () => {
     });
     await prisma.pet.create({
         data: {
-            // type: "Cat",
             breed: "Orange Tabby",
             name: "Garfield",
             gender: "male",
@@ -94,7 +87,6 @@ const main = async () => {
     });
     await prisma.pet.create({
         data: {
-            // type: "Dog",
             breed: "Canis Lupus (Grey Wolf)",
             name: "Hyde",
             gender: "male",
@@ -104,7 +96,6 @@ const main = async () => {
     });
     await prisma.pet.create({
         data: {
-            // type: "Cat",
             breed: "Panthera Tigris (Bengal Tiger)",
             name: "Ozzy",
             gender: "male",
@@ -114,7 +105,6 @@ const main = async () => {
     });
     await prisma.pet.create({
         data: {
-            // type: "Fish",
             breed: "Moorish Idol",
             name: "Celeste",
             gender: "female",
@@ -124,7 +114,6 @@ const main = async () => {
     });
     await prisma.pet.create({
         data: {
-            // type: "Lizard",
             breed: "Bearded Dragon",
             name: "Drakaris",
             gender: "female",
@@ -140,8 +129,6 @@ const main = async () => {
             content: "This is the first post on the site, I'd better say something meaningful... Birds are tiny dinosaurs.",
             postImg: "https://www.rd.com/wp-content/uploads/2018/06/BNB16_1471813357616_648_preview_maxWidth_1600_maxHeight_1600.jpg",
             userId: user3.id,
-            // likes: 2,
-            // dislikes: 7,
         },
     });
 

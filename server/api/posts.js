@@ -28,6 +28,7 @@ router.get("/:id", requireUser, async (req, res) => {
         res.send(error);
     }
 });
+
 router.get("/user/:userId", requireUser, async (req, res) => {
     try {
         const userId = Number(req.params.userId);

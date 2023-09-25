@@ -30,6 +30,7 @@ router.get("/:id", requireUser, async (req, res) => {
         res.send(error);
     }
 });
+
 router.get("/userpets/:userId", requireUser, async (req, res) => {
     try {
         const userId = Number(req.params.userId);
@@ -46,7 +47,6 @@ router.get("/userpets/:userId", requireUser, async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
-
 
 router.post("/", requireUser, async (req, res) => {
     try {
@@ -99,6 +99,5 @@ router.delete("/:id", requireUser, async (req, res) => {
         res.send({ message: "Internal server error" });
     }
 });
-
 
 module.exports = router;

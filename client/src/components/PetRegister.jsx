@@ -42,7 +42,6 @@ const PetRegistrationForm = () => {
                 body: JSON.stringify(petFormData),
             });
             const data = await response.json()
-            console.log(data);
             if(response.ok){
                 alert('Pet registered successfully');
             } else {

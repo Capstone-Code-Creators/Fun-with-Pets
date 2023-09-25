@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const RegisterForm = ({ setUserSignedIn }) => {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
@@ -40,8 +38,6 @@ const RegisterForm = ({ setUserSignedIn }) => {
       });
 
       const data = await response.json();
-
-      console.log(data)
       
       if (data.token && data.user) {
         const token = data.token;
@@ -50,8 +46,6 @@ const RegisterForm = ({ setUserSignedIn }) => {
         localStorage.setItem('token', token);
         const signin = localStorage.getItem('id')
         setUserSignedIn(signin)
-
-        console.log('User registered:', user);
 
         navigate('/profile');
       }else{

@@ -18,7 +18,6 @@ const Navbar = ({ userSignedIn, setUserSignedIn }) => {
         localStorage.setItem('id', null);
 
         setUserSignedIn(false);
-        
         navigate('/');
     };
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const ProfileDataFetcher = ({ token, setUser, setPosts, setReplies }) => {
+const ProfileDataFetcher = ({ setUser }) => {
     useEffect(() => {
       const token = localStorage.getItem("token")
       const userId = localStorage.getItem("id")

@@ -36,7 +36,7 @@ const Posts = () => {
             }
         };
 
-        fetchPosts(); // This is the line you missed
+        fetchPosts();
     }, [token]);
 
     const addPost = async (e) => {
@@ -51,15 +51,14 @@ const Posts = () => {
             },
             body,
         });
+
         const data = await response.json();
-        console.log(data);
 
         if (response.ok) {
             setTitle('');
             setContent('');
             setImage('');
 
-            // Fetch the updated list of posts
             const updatedPostsResponse = await fetch('/api/posts', {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -73,7 +72,6 @@ const Posts = () => {
     };
 
     const handleLike = (postId) => {
-        // If post is already liked, then unlike it. Otherwise, like it.
         if (likedPosts[postId]) {
             setLikedPosts((prev) => ({
                 ...prev,
@@ -84,7 +82,6 @@ const Posts = () => {
                 ...prev,
                 [postId]: true,
             }));
-            // Also, ensure it's not disliked
             setDislikedPosts((prev) => ({
                 ...prev,
                 [postId]: false,
@@ -93,7 +90,6 @@ const Posts = () => {
     };
 
     const handleDislike = (postId) => {
-        // If post is already disliked, then undislike it. Otherwise, dislike it.
         if (dislikedPosts[postId]) {
             setDislikedPosts((prev) => ({
                 ...prev,
@@ -104,7 +100,6 @@ const Posts = () => {
                 ...prev,
                 [postId]: true,
             }));
-            // Also, ensure it's not liked
             setLikedPosts((prev) => ({
                 ...prev,
                 [postId]: false,
@@ -117,8 +112,7 @@ const Posts = () => {
             ...prev,
             [postId]: [...(prev[postId] || []), commentText],
         }));
-        setCurrentCommentText(''); // Reset comment input
-        // TODO: Update comment in the backend
+        setCurrentCommentText(''); 
     };
     const handleReplySubmit = (postId, commentId, replyText) => {
         setReplies((prev) => ({
@@ -135,7 +129,6 @@ const Posts = () => {
             );
             return { ...prev, [postId]: updatedComments };
         });
-        // Remove associated replies to this comment as well
         setReplies((prev) => {
             const updatedReplies = { ...prev };
             delete updatedReplies[commentId];

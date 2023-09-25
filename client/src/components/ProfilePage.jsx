@@ -47,4 +47,4 @@ const ProfileContent = ({setUser, user}) => {
     )
 }
 
-export default ProfileContent
+export default ProfileContent;

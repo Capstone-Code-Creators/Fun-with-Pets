@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import ProfileDataFetcher from '../components/ProfileDataFetcher';
-
 import PostsDeleteHandler from '../components/PostsDeleteHandler';
 import ProfileContent from '../components/ProfilePage';
 
