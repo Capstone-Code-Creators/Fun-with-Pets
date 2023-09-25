@@ -11,7 +11,6 @@ const Posts = () => {
     const [title, setTitle] = useState('');
     const [postImg, setImage] = useState('');
     const [currentCommentText, setCurrentCommentText] = useState('');
-
     const [likedPosts, setLikedPosts] = useState({});
     const [dislikedPosts, setDislikedPosts] = useState({});
     const [comments, setComments] = useState({});
@@ -129,9 +128,34 @@ const Posts = () => {
         setCurrentReplyText('');
     };
 
+    const handleDeleteComment = (postId, commentId) => {
+        setComments((prev) => {
+            const updatedComments = prev[postId].filter(
+                (comment) => comment.id !== commentId,
+            );
+            return { ...prev, [postId]: updatedComments };
+        });
+        // Remove associated replies to this comment as well
+        setReplies((prev) => {
+            const updatedReplies = { ...prev };
+            delete updatedReplies[commentId];
+            return updatedReplies;
+        });
+    };
+
+    const handleDeleteReply = (commentId, replyId) => {
+        setReplies((prev) => {
+            const updatedReplies = prev[commentId].filter(
+                (reply) => reply.id !== replyId,
+            );
+            return { ...prev, [commentId]: updatedReplies };
+        });
+    };
+
     return (
         <>
             <ProfileDataFetcher setUser={setUser} />
+
             <section className="post-container">
                 <h1 id="post-title">What's on your mind...</h1>
                 <section id="post-details">
@@ -145,7 +169,7 @@ const Posts = () => {
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
                                     required
-                                ></textarea>
+                                />
                             </div>
                             <div>
                                 <label>Image URL: </label>
@@ -161,6 +185,7 @@ const Posts = () => {
                     </div>
                 </section>
             </section>
+
             <section className="feed">
                 {posts.map((post) => (
                     <div key={post.id} className="post-box">
@@ -168,7 +193,7 @@ const Posts = () => {
                             <h2 id="user-title">
                                 {user.firstName} {user.lastName}
                             </h2>
-                            <div>
+                            <div className="post-actions">
                                 <button
                                     onClick={() => handleLike(post.id)}
                                     style={{
@@ -210,7 +235,6 @@ const Posts = () => {
                         </p>
 
                         <div className="comment-section">
-                            <div>
                             <textarea
                                 placeholder="Add a comment..."
                                 value={currentCommentText}
@@ -228,21 +252,39 @@ const Posts = () => {
                             >
                                 Comment
                             </button>
-                            </div>
-                            <div>       
-                            {comments[post.id]?.map((comment, commentIndex) => (
-                                <div key={commentIndex}>
-                                    <p>{comment.text}</p>
-                                    {/* <button
+                            <div className='comment-post'>
+                            {comments[post.id]?.map((comment) => (
+                                <div key={comment.id}>
+                                    <div id='comment-output'>
+                                    <p>{comment}</p>
+                                    <button
                                         onClick={() =>
-                                            handleDeleteComment(comment.id)
+                                            handleDeleteComment(
+                                                post.id,
+                                                comment.id,
+                                            )
                                         }
                                     >
                                         X
-                                    </button> */}
-
-                                    {/* Reply to Comment */}
-                                    <div style={{ marginLeft: '30px' }}>
+                                    </button>
+                                    </div>
+                                    
+                                    <div className="reply-section">
+                                    {replies[comment.id]?.map((reply) => (
+                                            <div id='reply-text-out' key={reply.id}>
+                                                <p>{reply}</p>
+                                                <button
+                                                    onClick={() =>
+                                                        handleDeleteReply(
+                                                            comment.id,
+                                                            reply.id,
+                                                        )
+                                                    }
+                                                >
+                                                    X
+                                                </button>
+                                            </div>
+                                        ))}
                                         <textarea
                                             placeholder="Reply to this comment..."
                                             value={currentReplyText}
@@ -264,22 +306,12 @@ const Posts = () => {
                                             Reply
                                         </button>
 
-                                        {/* Display replies for the comment */}
-                                        {replies[comment.id]?.map(
-                                            (reply, replyIndex) => (
-                                                <p key={replyIndex}>{reply}</p>
-                                            ),
-                                        )}
+                                       
                                     </div>
                                 </div>
+                            
                             ))}
-                            </div> 
-                        </div>
-                        {/* Display comments for the post */}
-                        <div>
-                            {comments[post.id]?.map((comment, index) => (
-                                <p key={index}>{comment}</p>
-                            ))}
+                            </div>
                         </div>
                     </div>
                 ))}
