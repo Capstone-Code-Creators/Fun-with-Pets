@@ -8,7 +8,10 @@ body::-webkit-scrollbar{
   display: none;
 }
 
-
+#Rags {
+  height: 40em;
+  width: 30em;
+}
 
 body {
   font-family: 'Arial', sans-serif;
