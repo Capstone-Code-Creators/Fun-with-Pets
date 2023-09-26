@@ -24,7 +24,7 @@ const PetFetcher = () => {
         },[])
 
   return (
-    <div>
+    <div className="petsDetails">
       <h2>My Pets</h2>
       
         {pets.map((pet) => (

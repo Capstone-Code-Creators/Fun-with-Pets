@@ -26,13 +26,14 @@ const ProfileContent = ({setUser, user}) => {
 
     return (
         <>
-            <div>
+            <div className='profilePage'>
                 <h1>Profile Page</h1>
+                <div className='userDetails'>
                 <p><strong>Name:</strong> {user.firstName} {user.lastName}</p>
                 <p><strong>Username:</strong> {user.username}</p>
                 <p><strong>Location:</strong> {user.location}</p>
                 <p><strong>Email:</strong> {user.email}</p>
-              
+                </div>
                 {user.profilePic && (
                     <div>
                         <h2>Profile Picture</h2>

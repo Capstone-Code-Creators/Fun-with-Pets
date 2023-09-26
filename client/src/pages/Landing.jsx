@@ -5,7 +5,7 @@ import '../App.css';
 const Landing = () => {
   return (
     <section className="landing-page">
-      <h1>Welcome to Our Website</h1>
+      <h1>RAGTAG</h1>
       <section>
         <img src="https://static.vecteezy.com/system/resources/thumbnails/006/470/731/small/modern-animal-pet-logo-template-free-vector.jpg" alt="logo" />
       </section>
