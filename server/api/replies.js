@@ -62,7 +62,7 @@ router.delete("/:id", requireUser, async (req, res) => {
 
         const reply = await prisma.reply.findUnique({
             where: {
-                id: id,
+                id: replyId,
             },
         });
 

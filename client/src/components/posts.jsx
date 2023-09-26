@@ -135,12 +135,17 @@ const Posts = () => {
             if (response.ok) {
                 const data = await response.json();
                 // Assuming the response contains the ID of the newly created reply
-                const newReplyId = data.id;
-                
+                const highestReplyId = Math.max(
+                    ...(replies[commentId] || []).map((reply) => reply.id),
+                    0
+                );
+                const newReplyId = highestReplyId + 1;
+
                 // Update the state with the new reply
                 setReplies((prev) => ({
                     ...prev,
-                    [commentId]: [...(prev[commentId] || []), { id: newReplyId, text: replyText }],
+                    [commentId]: [...(prev[commentId] || []), 
+                    { id: newReplyId, text: replyText }],
                 }));
                 setCurrentReplyText('');
             } else {
@@ -169,60 +174,41 @@ const Posts = () => {
     const handleDeleteReply = async (postId, commentId, replyId) => {
         console.log(`Deleting reply: postId=${postId}, commentId=${commentId}, replyId=${replyId}`);
         try {
-          await fetch(`/api/replies/${replyId}`, {
+          const response = await fetch(`/api/replies/${replyId}`, {
             method: 'DELETE',
             headers: {
               "Authorization": `Bearer ${token}`
             }
           });
   
-          setReplies((prevReplies) => {
-            const newReplies = { ...prevReplies};
+        //   setReplies((prevReplies) => {
+        //     const newReplies = { ...prevReplies};
 
-            // Initialize an empty array for the comment ID if it doesn't exist
-            if (!newReplies[commentId]) {
-                newReplies[commentId] = [];
-            }
+        //     // Initialize an empty array for the comment ID if it doesn't exist
+        //     if (newReplies[commentId]) {
+        //         newReplies[commentId] = newReplies[commentId].filter(
+        //             (reply) => reply.id !== replyId
+        //         );
+        //     }
 
-            // Find the index of the deleted reply in the array
-            const replyIndex = newReplies[commentId].findIndex(
-                (reply) => reply.id === replyId
-            );
+        //     return newReplies;
+        //   });
 
-            // If the reply is found, remove it
-            if (replyIndex !== -1) {
-                newReplies[commentId].splice(replyIndex, 1);
-            }
+            setReplies((prevReplies) => {
+                const newReplies = { ...prevReplies };
 
-            return newReplies;
-          });
+                if (newReplies[commentId]) {
+                    newReplies[commentId] = newReplies[commentId].filter(
+                        (reply) => reply.id !== replyId
+                    );
+                }
+
+                return newReplies;
+            });
         } catch (error) {
           console.error('Error deleting reply:', error);
         }
       };
-    
-    // const handleDeleteComment = (postId, commentId) => {
-    //     setComments((prev) => {
-    //         const updatedComments = prev[postId].filter(
-    //             (comment) => comment.id !== commentId,
-    //         );
-    //         return { ...prev, [postId]: updatedComments };
-    //     });
-    //     setReplies((prev) => {
-    //         const updatedReplies = { ...prev };
-    //         delete updatedReplies[commentId];
-    //         return updatedReplies;
-    //     });
-    // };
-
-    // const handleDeleteReply = (commentId, replyId) => {
-    //     setReplies((prev) => {
-    //         const updatedReplies = prev[commentId].filter(
-    //             (reply) => reply.id !== replyId,
-    //         );
-    //         return { ...prev, [commentId]: updatedReplies };
-    //     });
-    // };
 
     return (
         <>
@@ -325,8 +311,8 @@ const Posts = () => {
                                 Comment
                             </button>
                             <div className='comment-post'>
-                                {comments[post.id]?.map((comment, commentIndex) => (
-                                    <div key={`comment-${post.id}-${commentIndex}`}>
+                                {comments[post.id]?.map((comment) => (
+                                    <div key={`comment-${comment.id}`}>
                                         <div id='comment-output'>
                                         <p>{comment.text}</p>
                                         <button
@@ -334,6 +320,7 @@ const Posts = () => {
                                                 handleDeleteReply(
                                                     post.id,
                                                     comment.id,
+                                                    comment.replyId
                                                 )
                                             }
                                     >
@@ -342,8 +329,8 @@ const Posts = () => {
                                     </div>
                                     
                                     <div className="reply-section">
-                                    {replies[comment.id]?.map((reply, replyIndex) => (
-                                            <div id='reply-text-out' key={`reply-${post.id}-${comment.id}-${replyIndex}`}>
+                                    {replies[comment.id]?.map((reply) => (
+                                            <div id='reply-text-out' key={`reply-${reply.id}`}>
                                                 <p>{reply.text}</p>
                                                 <button
                                                     onClick={() =>
