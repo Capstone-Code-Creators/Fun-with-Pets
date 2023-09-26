@@ -30,12 +30,17 @@ const IndividualPostsFetcher = () => {
     }, []);
 
     return (
-        <div>
+        <div className='userPost'>
             <h2>My Posts</h2>
             {posts.map((post) => (
-                <div key={post.id}>
+                <div
+                className='userPostBox'
+                 key={post.id}>
                     <h3>{post.title}</h3>
+                    <div id='userPostContent'>
+                    <img id='userImg' src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" alt="user" />
                     <p>{post.content}</p>
+                    </div>
                 </div>
             ))}
         </div>

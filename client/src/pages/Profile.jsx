@@ -12,7 +12,9 @@ const Profile = ({ token }) => {
     const formatUser = (user) => {
         return (
             <>
+                <div id='welcomeUser'>
                 <h2>Welcome, {user.firstName}</h2>
+                </div>
             </>
         );
     };
@@ -35,10 +37,10 @@ const Profile = ({ token }) => {
     };
 
     return (
-        <div>
+        <div >
             {user && formatUser(user)}
 
-            <button>Create a Post!</button>
+            {/* <button>Create a Post!</button> */}
 
             <ProfileDataFetcher
                 token={token}
