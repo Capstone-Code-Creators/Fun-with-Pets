@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ProfileDataFetcher from './ProfileDataFetcher';
-import handleDeletePost from './PostsDeleteHandler';
+import PostsDeleteHandler from './PostsDeleteHandler';
 import '../App.css';
 
 const Posts = () => {
@@ -15,7 +15,7 @@ const Posts = () => {
     const [dislikedPosts, setDislikedPosts] = useState({});
     const [comments, setComments] = useState({});
     const [currentReplyText, setCurrentReplyText] = useState('');
-    const [replies, setReplies] = useState({});
+    const [replies, setReplies] = useState([]);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -108,42 +108,121 @@ const Posts = () => {
     };
 
     const handleCommentSubmit = (postId, commentText) => {
+        const nextCommentId = comments[postId]?.length + 1 || 1; // Start commentId from 1
         setComments((prev) => ({
             ...prev,
-            [postId]: [...(prev[postId] || []), commentText],
+            [postId]: [...(prev[postId] || []), { id: nextCommentId, text: commentText }],
         }));
         setCurrentCommentText(''); 
     };
-    const handleReplySubmit = (postId, commentId, replyText) => {
-        setReplies((prev) => ({
-            ...prev,
-            [commentId]: [...(prev[commentId] || []), replyText],
-        }));
-        setCurrentReplyText('');
+
+    const handleReplySubmit = async (postId, commentId, replyText) => {
+        try {
+            const response = await fetch('/api/replies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    postId, // Include postId
+                    userId: user.id, // Include userId (assuming you have user data)
+                    commentId, // Include commentId
+                    replyText,
+                }),
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                // Assuming the response contains the ID of the newly created reply
+                const newReplyId = data.id;
+                
+                // Update the state with the new reply
+                setReplies((prev) => ({
+                    ...prev,
+                    [commentId]: [...(prev[commentId] || []), { id: newReplyId, text: replyText }],
+                }));
+                setCurrentReplyText('');
+            } else {
+                console.error('Failed to add a new reply.');
+            }
+        } catch (error) {
+            console.error('Error adding reply:', error);
+        }
     };
 
-    const handleDeleteComment = (postId, commentId) => {
-        setComments((prev) => {
-            const updatedComments = prev[postId].filter(
-                (comment) => comment.id !== commentId,
-            );
-            return { ...prev, [postId]: updatedComments };
-        });
-        setReplies((prev) => {
-            const updatedReplies = { ...prev };
-            delete updatedReplies[commentId];
-            return updatedReplies;
-        });
+    const handleDeletePost = async (postId) => {
+        try {
+            await fetch(`/api/posts/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            setPosts(posts.filter((post) => post.id !== postId));
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        }
     };
 
-    const handleDeleteReply = (commentId, replyId) => {
-        setReplies((prev) => {
-            const updatedReplies = prev[commentId].filter(
-                (reply) => reply.id !== replyId,
+    const handleDeleteReply = async (postId, commentId, replyId) => {
+        console.log(`Deleting reply: postId=${postId}, commentId=${commentId}, replyId=${replyId}`);
+        try {
+          await fetch(`/api/replies/${replyId}`, {
+            method: 'DELETE',
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+          });
+  
+          setReplies((prevReplies) => {
+            const newReplies = { ...prevReplies};
+
+            // Initialize an empty array for the comment ID if it doesn't exist
+            if (!newReplies[commentId]) {
+                newReplies[commentId] = [];
+            }
+
+            // Find the index of the deleted reply in the array
+            const replyIndex = newReplies[commentId].findIndex(
+                (reply) => reply.id === replyId
             );
-            return { ...prev, [commentId]: updatedReplies };
-        });
-    };
+
+            // If the reply is found, remove it
+            if (replyIndex !== -1) {
+                newReplies[commentId].splice(replyIndex, 1);
+            }
+
+            return newReplies;
+          });
+        } catch (error) {
+          console.error('Error deleting reply:', error);
+        }
+      };
+    
+    // const handleDeleteComment = (postId, commentId) => {
+    //     setComments((prev) => {
+    //         const updatedComments = prev[postId].filter(
+    //             (comment) => comment.id !== commentId,
+    //         );
+    //         return { ...prev, [postId]: updatedComments };
+    //     });
+    //     setReplies((prev) => {
+    //         const updatedReplies = { ...prev };
+    //         delete updatedReplies[commentId];
+    //         return updatedReplies;
+    //     });
+    // };
+
+    // const handleDeleteReply = (commentId, replyId) => {
+    //     setReplies((prev) => {
+    //         const updatedReplies = prev[commentId].filter(
+    //             (reply) => reply.id !== replyId,
+    //         );
+    //         return { ...prev, [commentId]: updatedReplies };
+    //     });
+    // };
 
     return (
         <>
@@ -246,29 +325,30 @@ const Posts = () => {
                                 Comment
                             </button>
                             <div className='comment-post'>
-                            {comments[post.id]?.map((comment) => (
-                                <div key={comment.id}>
-                                    <div id='comment-output'>
-                                    <p>{comment}</p>
-                                    <button
-                                        onClick={() =>
-                                            handleDeleteComment(
-                                                post.id,
-                                                comment.id,
-                                            )
-                                        }
+                                {comments[post.id]?.map((comment, commentIndex) => (
+                                    <div key={`comment-${post.id}-${commentIndex}`}>
+                                        <div id='comment-output'>
+                                        <p>{comment.text}</p>
+                                        <button
+                                            onClick={() =>
+                                                handleDeleteReply(
+                                                    post.id,
+                                                    comment.id,
+                                                )
+                                            }
                                     >
                                         X
                                     </button>
                                     </div>
                                     
                                     <div className="reply-section">
-                                    {replies[comment.id]?.map((reply) => (
-                                            <div id='reply-text-out' key={reply.id}>
-                                                <p>{reply}</p>
+                                    {replies[comment.id]?.map((reply, replyIndex) => (
+                                            <div id='reply-text-out' key={`reply-${post.id}-${comment.id}-${replyIndex}`}>
+                                                <p>{reply.text}</p>
                                                 <button
                                                     onClick={() =>
                                                         handleDeleteReply(
+                                                            post.id,
                                                             comment.id,
                                                             reply.id,
                                                         )

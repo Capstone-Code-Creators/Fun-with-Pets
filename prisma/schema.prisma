@@ -47,7 +47,7 @@ model Post {
 model Reply {
   id Int @id @default(autoincrement())
   content String @db.Text
-  postId Int
+  postId Int @default(autoincrement())
   post Post @relation(fields: [postId], references: [id])
   userId Int
   user User @relation(fields: [userId], references: [id])

@@ -2,35 +2,35 @@ import React from 'react';
 
 const PostsDeleteHandler = ({ token, posts, setPosts, replies, setReplies }) => {
 
-    const handleDeletePost = async (postId) => {
-        try {
-            await fetch(`/api/posts/${postId}`, {
-                method: 'DELETE',
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+    // const handleDeletePost = async (postId) => {
+    //     try {
+    //         await fetch(`/api/posts/${postId}`, {
+    //             method: 'DELETE',
+    //             headers: {
+    //                 "Authorization": `Bearer ${token}`
+    //             }
+    //         });
 
-            setPosts(posts.filter((post) => post.id !== postId));
-        } catch (error) {
-            console.error('Error deleting post:', error);
-        }
-    };
+    //         setPosts(posts.filter((post) => post.id !== postId));
+    //     } catch (error) {
+    //         console.error('Error deleting post:', error);
+    //     }
+    // };
 
-    const handleDeleteReply = async (replyId) => {
-        try {
-          await fetch(`/api/replies/${replyId}`, {
-            method: 'DELETE',
-            headers: {
-              "Authorization": `Bearer ${token}`
-            }
-          });
+    // const handleDeleteReply = async (replyId) => {
+    //     try {
+    //       await fetch(`/api/replies/${replyId}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //           "Authorization": `Bearer ${token}`
+    //         }
+    //       });
   
-          setReplies(replies.filter((reply) => reply.id !== replyId));
-        } catch (error) {
-          console.error('Error deleting reply:', error);
-        }
-      };
+    //       setReplies(replies.filter((reply) => reply.id !== replyId));
+    //     } catch (error) {
+    //       console.error('Error deleting reply:', error);
+    //     }
+    //   };
 
     return (
         <div>

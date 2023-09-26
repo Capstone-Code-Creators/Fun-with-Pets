@@ -143,7 +143,7 @@ const main = async () => {
     await prisma.reply.create({
         data: {
             content: "I agree, but you are still a fool",
-            postId: 1,
+            postId: 2,
             userId: 2,
         },
     });
